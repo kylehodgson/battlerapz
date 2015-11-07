@@ -1,21 +1,32 @@
 BattleTapez = typeof BattleTapez === "undefined"? {} : BattleTapez;
 
-BattleTapez.Punches = function() {
-  return {
-    getPunches : function() {
-      return [];  }}};
+BattleTapez.BattleService = function() {
+  return {};
+};
 
 
-BattleTapez.PunchCtrl = function($scope,Punches) {
-  $scope.punches = Punches.getPunches();
+BattleTapez.ScoreCtrl = function($scope, Battle) {
+  $scope.Battle = Battle;
+  $scope.Battle.punches=[];
 
-  $scope.addPunch = function() {
-    console.log("added a punch.");
-    $scope.punches.push({time: Date.now(), round: $scope.round});
+  $scope.addPunch = function(round) {
+    console.log("added a punch for round "+round);
+    $scope.Battle.punches.push({time: Date.now(), round: round});
   }
 };
 
-BattleTapez.AddPunch = function() {
+BattleTapez.StartCtrl = function($scope, Battle) {
+  $scope.Battle = Battle;
+
+  $scope.startBattle = function(rapper1,rapper2) {
+    console.log("Starting battle with rappers " + rapper1 + " and " + rapper2);
+    Battle.rapper1 = rapper1;
+    Battle.rapper2 = rapper2;
+    Battle.rounds = [];
+  }
+}
+
+BattleTapez.AddPunchDirective = function() {
   return {
     restrict: "E",
     scope: {
@@ -28,8 +39,29 @@ BattleTapez.AddPunch = function() {
   }
 };
 
-BattleTapez.scoring = angular.module("scoring", []);
-BattleTapez.scoring.factory("Punches", BattleTapez.Punches);
-BattleTapez.scoring.directive("addPunch", BattleTapez.AddPunch);
-BattleTapez.scoring.controller("PunchCtrl", BattleTapez.PunchCtrl);
+BattleTapez.BARS = angular.module("bars", ['ngRoute']);
+BattleTapez.BARS.factory("Battle", BattleTapez.BattleService);
+BattleTapez.BARS.directive("addPunch", BattleTapez.AddPunchDirective);
+BattleTapez.BARS.controller("ScoreCtrl", BattleTapez.ScoreCtrl);
+BattleTapez.BARS.controller("StartCtrl", BattleTapez.StartCtrl);
 
+
+BattleTapez.BARS.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+    when('/round/score', {
+      templateUrl: 'partials/score-round.html',
+      controller: 'ScoreCtrl'
+    }).
+    when('/round/start', {
+      templateUrl: 'partials/start-round.html',
+      controller: 'StartCtrl'
+    }).
+    when('/round/finish', {
+      templateUrl: 'partials/finish-round.html',
+      controller: 'FinishRoundController'
+    }).
+    otherwise({
+      redirectTo: '/'
+    });
+  }]);

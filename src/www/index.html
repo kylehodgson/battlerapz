@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>BattleTapez</title>
 	<script src="angular.js"></script>
+	<script src="angular-route.js"></script>
 	<script src="app.js"></script>
 	<style>
 		.circlebutton{
@@ -19,14 +20,19 @@
 		}
 	</style>
 </head>
-<body ng-app="scoring">
-	<div ng-controller="PunchCtrl">
+<body ng-app="bars">
+	<div ng-controller="StartCtrl">
 		<p>Start a new round</p>
+		Rapper One
+		<input type="text" ng-model="rapper1"><br>
+		Rapper Two
+		<input type="text" ng-model="rapper2"><br>
+		<button ng-click="startBattle(rapper1,rapper2)">Start Battle</button>
+	</div>
+	<div ng-controller="ScoreCtrl">
 		<span>Enter the title:</span>
-		<input type="text" ng-model="round"><br>
-		<button ng-click="">Start round</button>
-		<add-punch done="addPunch(time, round)"></add-punch>
-		<button ng-click="">Finish round</button>
+		<input type="text" ng-model="round">
+		<add-punch done="addPunch(round)"></add-punch>
 	</div>
 </body>
 </html>
