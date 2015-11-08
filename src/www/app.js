@@ -34,14 +34,14 @@ BattleTapez.StartCtrl = function($scope, Battle) {
 BattleTapez.ScoreCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
   $scope.Battle.addRound();
-  var round = $scope.Battle.rounds.length;
+  $scope.round = $scope.Battle.rounds.length;
   $scope.addPunch = function() {
     var time = Date.now();
-    console.log("added a punch for round " + round + " with time " + time);
-    $scope.Battle.addPunch({round: round, time: time});
+    console.log("added a punch for round " + $scope.round + " with time " + time);
+    $scope.Battle.addPunch({round: $scope.round, time: time});
   }
   $scope.addRound = function() {
-    round++;
+    $scope.round++;
     $scope.Battle.addRound();
   }
 };
