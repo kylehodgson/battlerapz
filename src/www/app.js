@@ -1,30 +1,55 @@
 BattleTapez = typeof BattleTapez === "undefined"? {} : BattleTapez;
 
 BattleTapez.BattleService = function() {
-  return {};
+  return {
+    rapper1: "",
+    rapper2: "",
+    rounds: [],
+    addRound: function() {
+      console.log("Adding round.");
+      this.rounds.push({
+        punches: [],
+        number: this.rounds.length+1
+      });
+    },
+    addPunch: function(punch) {
+      this.rounds[this.rounds.length-1].punches.push(punch);
+    },
+    startBattle: function(rapper1,rapper2) {
+      this.rapper1=rapper1;
+      this.rapper2=rapper2;
+    }
+  };
 };
 
-
-BattleTapez.ScoreCtrl = function($scope, Battle) {
-  $scope.Battle = Battle;
-  $scope.Battle.punches=[];
-
-  $scope.addPunch = function(round) {
-    console.log("added a punch for round "+round);
-    $scope.Battle.punches.push({time: Date.now(), round: round});
-  }
-};
 
 BattleTapez.StartCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
-
   $scope.startBattle = function(rapper1,rapper2) {
     console.log("Starting battle with rappers " + rapper1 + " and " + rapper2);
-    Battle.rapper1 = rapper1;
-    Battle.rapper2 = rapper2;
-    Battle.rounds = [];
+    $scope.Battle.startBattle(rapper1,rapper2);
   }
-}
+};
+
+BattleTapez.ScoreCtrl = function($scope, Battle) {
+  $scope.Battle = Battle;
+  $scope.Battle.addRound();
+  var round = $scope.Battle.rounds.length;
+  $scope.addPunch = function() {
+    var time = Date.now();
+    console.log("added a punch for round " + round + " with time " + time);
+    $scope.Battle.addPunch({round: round, time: time});
+  }
+  $scope.addRound = function() {
+    round++;
+    $scope.Battle.addRound();
+  }
+};
+
+BattleTapez.FinishCtrl = function($scope, Battle) {
+  $scope.Battle = Battle;
+};
+
 
 BattleTapez.AddPunchDirective = function() {
   return {
@@ -33,7 +58,7 @@ BattleTapez.AddPunchDirective = function() {
       done: "&"
       },
     template: '<div>' +
-              '<a href="#" class="circlebutton" id="addPunch" ' +
+              '<a class="circlebutton" id="addPunch" ' +
               '  ng-click="done()">  ' +
               'Punch</a></div>  '
   }
@@ -44,6 +69,7 @@ BattleTapez.BARS.factory("Battle", BattleTapez.BattleService);
 BattleTapez.BARS.directive("addPunch", BattleTapez.AddPunchDirective);
 BattleTapez.BARS.controller("ScoreCtrl", BattleTapez.ScoreCtrl);
 BattleTapez.BARS.controller("StartCtrl", BattleTapez.StartCtrl);
+BattleTapez.BARS.controller("FinishCtrl", BattleTapez.FinishCtrl);
 
 
 BattleTapez.BARS.config(['$routeProvider',
@@ -59,9 +85,9 @@ BattleTapez.BARS.config(['$routeProvider',
     }).
     when('/round/finish', {
       templateUrl: 'partials/finish-round.html',
-      controller: 'FinishRoundController'
+      controller: 'FinishCtrl'
     }).
     otherwise({
-      redirectTo: '/'
+      redirectTo: '/round/start'
     });
   }]);
