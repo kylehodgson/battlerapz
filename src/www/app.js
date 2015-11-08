@@ -24,6 +24,9 @@ BattleTapez.BattleService = function() {
     startBattle: function(rapper1,rapper2) {
       this.rapper1=rapper1;
       this.rapper2=rapper2;
+    },
+    currentRound: function() {
+      return this.rounds.length;
     }
   };
 };
@@ -62,6 +65,13 @@ BattleTapez.ScoreCtrl = function($scope, Battle) {
   }
 };
 
+BattleTapez.PerformanceCtrl = function($scope, Battle) {
+  $scope.Battle = Battle;
+  $scope.round=$scope.Battle.currentRound();
+  $scope.rapper="rapper";
+  $scope.punches=20;
+};
+
 BattleTapez.FinishCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
 };
@@ -84,6 +94,7 @@ BattleTapez.BARS = angular.module("bars", ['ngRoute']);
 BattleTapez.BARS.factory("Battle", BattleTapez.BattleService);
 BattleTapez.BARS.directive("addPunch", BattleTapez.AddPunchDirective);
 BattleTapez.BARS.controller("ScoreCtrl", BattleTapez.ScoreCtrl);
+BattleTapez.BARS.controller("PerformanceCtrl", BattleTapez.PerformanceCtrl);
 BattleTapez.BARS.controller("StartCtrl", BattleTapez.StartCtrl);
 BattleTapez.BARS.controller("FinishCtrl", BattleTapez.FinishCtrl);
 
@@ -91,13 +102,17 @@ BattleTapez.BARS.controller("FinishCtrl", BattleTapez.FinishCtrl);
 BattleTapez.BARS.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-    when('/round/score', {
-      templateUrl: 'partials/score-round.html',
-      controller: 'ScoreCtrl'
-    }).
     when('/round/start', {
       templateUrl: 'partials/start-round.html',
       controller: 'StartCtrl'
+    }).
+    when('/round/performance', {
+      templateUrl: 'partials/round-performance.html',
+      controller: 'PerformanceCtrl'
+    }).
+    when('/round/score', {
+      templateUrl: 'partials/score-round.html',
+      controller: 'ScoreCtrl'
     }).
     when('/round/finish', {
       templateUrl: 'partials/finish-round.html',

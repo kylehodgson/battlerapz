@@ -1,10 +1,6 @@
-<p>{{Battle.rapper1}}</p>
-<p>{{Battle.rapper2}}</p>
-<p>Finished round</p>
+<p>Finished Battle</p>
 <div ng-repeat="round in Battle.rounds">
     <p>round {{round.number}}
-    <ul>
-        <p>Punches for {{Battle.rapper1}}: {{round.r1punches.length}}</p>
-        <p>Punches for {{Battle.rapper2}}: {{round.r2punches.length}}</p>
-    </ul>
+    <p>Punches for {{Battle.rapper1}}: {{round.r1punches.length}}</p>
+    <p>Punches for {{Battle.rapper2}}: {{round.r2punches.length}}</p>
 </div>
