@@ -6,17 +6,19 @@ BattleTapez.BattleService = function() {
     rapper2: "",
     rounds: [],
     rapper: 1,
+    round: 0,
     nextRound: function() {
-      console.log("Adding round.");
+      this.round++;
+      console.log("Adding round:"+this.round);
       this.rounds.push({
         r1punches: [],
         r2punches: [],
-        number: this.rounds.length+1,
+        number: this.round,
         scores: []
       });
     },
-    addPunch: function(rapper,punch) {
-      if(rapper==1) {
+    addPunch: function(punch) {
+      if(this.rapper==1) {
         this.rounds[this.rounds.length-1].r1punches.push(punch);
       } else {
         this.rounds[this.rounds.length-1].r2punches.push(punch);
@@ -26,9 +28,6 @@ BattleTapez.BattleService = function() {
     startBattle: function(rapper1,rapper2) {
       this.rapper1=rapper1;
       this.rapper2=rapper2;
-    },
-    currentRound: function() {
-      return this.rounds.length;
     },
     currentRapperName: function() {
       if(this.rapper==1) {
@@ -49,8 +48,7 @@ BattleTapez.BattleService = function() {
       return total;
     },
     scoreRapper: function() {
-      var round = this.currentRound()-1;
-      this.rounds[round].scores.push({categories: {}});
+      this.rounds[this.round-1].scores.push({categories: {}});
     },
     nextRapper: function() {
       if(this.rapper==1) {
@@ -58,7 +56,6 @@ BattleTapez.BattleService = function() {
       } else {
         this.rapper=1;
       }
-
     }
   };
 };
@@ -74,14 +71,17 @@ BattleTapez.StartCtrl = function($scope, Battle) {
 
 BattleTapez.ScoreCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
-  $scope.rapper=1;
-  $scope.rapperName=$scope.Battle.rapper1;
-  $scope.Battle.nextRound();
-  $scope.round = $scope.Battle.rounds.length;
+
+  if($scope.Battle.round==0) {
+    $scope.Battle.nextRound();
+  }
+
+  $scope.rapperName=$scope.Battle.currentRapperName();
+
   $scope.addPunch = function() {
     var time = Date.now();
-    console.log("added a punch for round " + $scope.round + " with time " + time + " for rapper " + $scope.rapperName);
-    $scope.Battle.addPunch($scope.rapper, {rapper: $scope.rapperName, round: $scope.round, time: time});
+    console.log("added a punch for round " + $scope.Battle.round + " with time " + time + " for rapper " + $scope.rapperName);
+    $scope.Battle.addPunch( {rapper: $scope.rapperName, round: $scope.Battle.round, time: time});
   };
   $scope.nextRapper = function() {
     $scope.Battle.nextRapper();
@@ -93,18 +93,16 @@ BattleTapez.ScoreCtrl = function($scope, Battle) {
 
 BattleTapez.PerformanceCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
-  $scope.round=$scope.Battle.currentRound();
-  $scope.rapper=$scope.Battle.rapper;
   $scope.rapperName=$scope.Battle.currentRapperName();
-  if($scope.rapper==1) {
-    $scope.punches=$scope.Battle.rounds[$scope.round-1].r1punches.length;
+  if($scope.Battle.rapper==1) {
+    $scope.punches=$scope.Battle.rounds[$scope.Battle.round-1].r1punches.length;
   } else {
-    $scope.punches=$scope.Battle.rounds[$scope.round-1].r2punches.length;
+    $scope.punches=$scope.Battle.rounds[$scope.Battle.round-1].r2punches.length;
   }
   $scope.total=$scope.punches;
   $scope.setScore=function(category,score) {
-    $scope.Battle.setScore($scope.round,$scope.rapper,category,score);
-    $scope.total = $scope.punches + Battle.totalCategoryScoresForRound($scope.rapper, $scope.round);
+    $scope.Battle.setScore($scope.Battle.round,$scope.Battle.rapper,category,score);
+    $scope.total = $scope.punches + Battle.totalCategoryScoresForRound($scope.Battle.rapper, $scope.Battle.round);
     for(var i=1; i<=5; i++) {
       var elementToUpdate = angular.element( document.querySelector( "#" + category + "-" + i ) );
       if(i <= score) {
@@ -115,15 +113,10 @@ BattleTapez.PerformanceCtrl = function($scope, Battle) {
     }
   };
   $scope.nextRound=function() {
-    if($scope.rapper==2) {
-      $scope.round++;
-      $scope.rapper=1;
-      $scope.rapperName=$scope.Battle.rapper1;
+    if($scope.Battle.rapper==2) {
       $scope.Battle.nextRound();
-    } else {
-      $scope.rapper=2;
-      $scope.rapperName=$scope.Battle.rapper2;
     }
+    $scope.Battle.nextRapper();
   }
 };
 

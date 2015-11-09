@@ -3,12 +3,12 @@
     <p>round {{round.number}}
     <p>Punches for {{Battle.rapper1}}: {{round.r1punches.length}}</p>
     <p>Category scores for {{Battle.rapper1}}:</p>
-    <div ng-repeat="(cat,score) in round.scores.categories">
-        {{cat}} {{score}}
+    <div ng-repeat="(cat,score) in round.scores[0].categories">
+        <p>{{cat}}: {{score}}</p>
     </div>
     <p>Punches for {{Battle.rapper2}}: {{round.r2punches.length}}</p>
-    <div ng-repeat="(cat,score) in round.scores.categories">
-        {{cat}} {{score}}
+    <p>Category scores for {{Battle.rapper2}}:</p>
+    <div ng-repeat="(cat,score) in round.scores[1].categories">
+        <p>{{cat}}: {{score}}</p>
     </div>
 </div>
-{{Battle}}
