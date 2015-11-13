@@ -23,7 +23,6 @@ BattleTapez.BattleService = function() {
       } else {
         this.rounds[this.rounds.length-1].r2punches.push(punch);
       }
-
     },
     startBattle: function(rapper1,rapper2) {
       this.rapper1=rapper1;
@@ -47,7 +46,7 @@ BattleTapez.BattleService = function() {
       });
       return total;
     },
-    scoreRapper: function() {
+    addCategoriesForRound: function() {
       this.rounds[this.round-1].scores.push({categories: {}});
     },
     nextRapper: function() {
@@ -56,6 +55,18 @@ BattleTapez.BattleService = function() {
       } else {
         this.rapper=1;
       }
+    },
+    scoreForRapper: function(rapper) {
+      var score = 0;
+      for( var i=0;i < this.rounds.length; i++) {
+        var punchesKey = "r" + rapper + "punches";
+        score += this.rounds[i][punchesKey].length;
+        var categories = this.rounds[i].scores[rapper - 1].categories;
+        Object.keys(categories).forEach(function(category) {
+          score += categories[category];
+        });
+      }
+      return score;
     }
   };
 };
@@ -86,13 +97,11 @@ BattleTapez.ScoreCtrl = function($scope, Battle) {
   $scope.nextRapper = function() {
     $scope.Battle.nextRapper();
   };
-  $scope.scoreRapper = function() {
-    $scope.Battle.scoreRapper();
-  };
 };
 
 BattleTapez.PerformanceCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
+  $scope.Battle.addCategoriesForRound();
   $scope.rapperName=$scope.Battle.currentRapperName();
   if($scope.Battle.rapper==1) {
     $scope.punches=$scope.Battle.rounds[$scope.Battle.round-1].r1punches.length;
@@ -122,6 +131,8 @@ BattleTapez.PerformanceCtrl = function($scope, Battle) {
 
 BattleTapez.FinishCtrl = function($scope, Battle) {
   $scope.Battle = Battle;
+  $scope.rapper1Score = $scope.Battle.scoreForRapper(1);
+  $scope.rapper2Score = $scope.Battle.scoreForRapper(2);
 };
 
 
@@ -138,9 +149,20 @@ BattleTapez.AddPunchDirective = function() {
   }
 };
 
+BattleTapez.StarScoresDirective = function(scoreType) {
+  return {
+    restrict: "E",
+    scope: {
+      setScore: "&"
+    },
+    template: '<a id="rapping-1" ng-click="setScore(scoreType,1)">☆</a><a id="rapping-2" ng-click="setScore("rapping",2)">☆</a><a id="rapping-3" ng-click="setScore("rapping",3)">☆</a><a id="rapping-4" ng-click="setScore("rapping",4)">☆</a><a id="rapping-5" ng-click="setScore("rapping",5)">☆</a>'
+  }
+};
+
 BattleTapez.BARS = angular.module("bars", ['ngRoute']);
 BattleTapez.BARS.factory("Battle", BattleTapez.BattleService);
 BattleTapez.BARS.directive("addPunch", BattleTapez.AddPunchDirective);
+BattleTapez.BARS.directive("starScores", BattleTapez.StarScoresDirective);
 BattleTapez.BARS.controller("ScoreCtrl", BattleTapez.ScoreCtrl);
 BattleTapez.BARS.controller("PerformanceCtrl", BattleTapez.PerformanceCtrl);
 BattleTapez.BARS.controller("StartCtrl", BattleTapez.StartCtrl);
