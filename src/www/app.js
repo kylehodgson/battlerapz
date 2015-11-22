@@ -7,6 +7,11 @@ BattleTapez.BattleService = function() {
     rounds: [],
     rapper: 1,
     round: 0,
+    setupCategoriesForCurrentRound: function (){
+        if(typeof this.rounds[this.round-1].scores[this.rapper-1] === "undefined"){
+          this.rounds[this.round - 1].scores.push({categories: {}});
+        }
+    },
     nextRound: function() {
       this.round++;
       console.log("Adding round:"+this.round);
@@ -16,6 +21,21 @@ BattleTapez.BattleService = function() {
         number: this.round,
         scores: []
       });
+      this.setupCategoriesForCurrentRound();
+    },
+    getCategories: function() {
+      return this.rounds[0].scores[0].categories;
+    },
+    getWinner: function() {
+      var rapper1Score = this.scoreForRapper(1);
+      var rapper2Score = this.scoreForRapper(2);
+        if(rapper1Score == rapper2Score) {
+        return "TIE";
+      } else if(rapper1Score > rapper2Score) {
+        return this.rapper1;
+      } else {
+        return this.rapper2;
+      }
     },
     addPunch: function(punch) {
       if(this.rapper==1) {
@@ -37,19 +57,9 @@ BattleTapez.BattleService = function() {
         return this.rapper2;
       }
     },
-    setScore: function(round,rapper,category,score) {
-      this.rounds[round-1].scores[rapper-1].categories[category]=score;
-    },
-    totalCategoryScoresForRound: function (rapper, round) {
-      var total=0;
-      var categories = this.rounds[round - 1].scores[rapper - 1].categories;
-        Object.keys(categories).forEach(function(category) {
-          total+=categories[category];
-      });
-      return total;
-    },
-    addCategoriesForRound: function() {
-      this.rounds[this.round-1].scores.push({categories: {}});
+    setScore: function(category,score) {
+      this.setupCategoriesForCurrentRound();
+      this.rounds[this.round-1].scores[this.rapper-1].categories[category]=score;
     },
     nextRapper: function() {
       if(this.rapper==1) {
@@ -63,10 +73,12 @@ BattleTapez.BattleService = function() {
       for( var i=0;i < this.rounds.length; i++) {
         var punchesKey = "r" + rapper + "punches";
         score += this.rounds[i][punchesKey].length;
-        var categories = this.rounds[i].scores[rapper - 1].categories;
-        Object.keys(categories).forEach(function(category) {
-          score += categories[category];
-        });
+        if (!(typeof this.rounds[i].scores[rapper - 1] === "undefined")) {
+          var categories = this.rounds[i].scores[rapper - 1].categories;
+          Object.keys(categories).forEach(function(category) {
+            score += categories[category];
+          });
+        }
       }
       return score;
     }
@@ -75,99 +87,78 @@ BattleTapez.BattleService = function() {
 
 BattleTapez.MobileController = function($scope, Battle) {
 
-  $scope.Battle = Battle;
+  const unSelectedStarsColor = '#0000ff';
+  const selectedStarsColor = '#ff0000';
+  const errorMax = 10;
+  const starMax = 5;
+  const lastRapper = 2;
 
-  $scope.scoreForRapper = function(rapper) {
-    return $scope.Battle.scoreForRapper(rapper);
+  $scope.getRound = function() {
+    return Battle.round;
   };
 
   $scope.startBattle = function(rapper1,rapper2) {
     console.log("Starting battle with rappers " + rapper1 + " and " + rapper2);
-    $scope.Battle.startBattle(rapper1,rapper2);
-    $scope.rapperName=$scope.Battle.currentRapperName();
+    Battle.startBattle(rapper1,rapper2);
+    $scope.rapperName=Battle.currentRapperName();
   };
 
   $scope.addPunch = function() {
     var time = Date.now();
-    console.log("added a punch for round " + $scope.Battle.round + " with time " + time + " for rapper " + $scope.Battle.currentRapperName());
-    $scope.Battle.addPunch( {rapper: $scope.Battle.currentRapperName(), round: $scope.Battle.round, time: time});
-  };
-
-  $scope.finishedRound = function() {
-    $scope.Battle.addCategoriesForRound();
-    if($scope.Battle.rapper==1) {
-      $scope.punches=$scope.Battle.rounds[$scope.Battle.round-1].r1punches.length;
-    } else {
-      $scope.punches=$scope.Battle.rounds[$scope.Battle.round-1].r2punches.length;
-    }
-  };
-
-  $scope.addCategoriesForRound = function() {
-    $scope.Battle.addCategoriesForRound();
-  };
-
-  $scope.nextRapper = function() {
-    $scope.Battle.nextRapper();
+    console.log("added a punch for round " + Battle.round + " with time " + time + " for rapper " + Battle.currentRapperName());
+    Battle.addPunch( {rapper: Battle.currentRapperName(), round: Battle.round, time: time});
   };
 
   $scope.setScore=function(category,score) {
     console.log("Setting score for " + category + " to " + score);
-    $scope.Battle.setScore($scope.Battle.round,$scope.Battle.rapper,category,score);
-    $scope.total = $scope.punches + Battle.totalCategoryScoresForRound($scope.Battle.rapper, $scope.Battle.round);
-    for(var i=1; i<=5; i++) {
-      var elementToUpdate = angular.element( document.querySelector( "#" + category + "-" + i ) );
+    Battle.setScore(category,score);
+
+    for(var i=1; i<= starMax; i++) {
       if(i <= score) {
-        elementToUpdate.css('color','#ff0000');
+        starsElementFor(category, i).css('color',selectedStarsColor);
       } else {
-        elementToUpdate.css('color','#0000ff');
+        starsElementFor(category, i).css('color',unSelectedStarsColor);
       }
     }
   };
 
   $scope.setErrors=function(category,score) {
     console.log("Setting errors for " + category + " to " + score);
-    $scope.Battle.setScore($scope.Battle.round,$scope.Battle.rapper,category,score*-1);
-    $scope.total = $scope.punches + Battle.totalCategoryScoresForRound($scope.Battle.rapper, $scope.Battle.round);
-    for(var i=1; i<=10; i++) {
-      var elementToUpdate = angular.element( document.querySelector( "#" + category + "-" + i ) );
+    Battle.setScore(category,score*-1);
+
+    for(var i=1; i<= errorMax; i++) {
       if(i <= score) {
-        elementToUpdate.css('color','#ff0000');
+        starsElementFor(category, i).css('color',selectedStarsColor);
       } else {
-        elementToUpdate.css('color','#0000ff');
+        starsElementFor(category, i).css('color',unSelectedStarsColor);
       }
     }
   };
 
   $scope.nextRound=function() {
-    if($scope.Battle.rapper==2) {
-      $scope.Battle.nextRound();
-    }
-    $scope.Battle.nextRapper();
-    $scope.rapperName=$scope.Battle.currentRapperName();
 
-    var categories = this.Battle.rounds[0].scores[0].categories;
-    Object.keys(categories).forEach(function(category) {
-      for(var i=1; i<=5; i++) {
-        var elementToUpdate = angular.element( document.querySelector( "#" + category + "-" + i ) );
-        elementToUpdate.css('color','#0000ff');
+    if(Battle.rapper==lastRapper) {
+      Battle.nextRound();
+    }
+    Battle.nextRapper();
+    Object.keys(Battle.getCategories()).forEach(function(category) {
+      for(var i=1; i<=starMax; i++) {
+        starsElementFor(category, i).css('color',unSelectedStarsColor);
       }
     });
-
   };
 
   $scope.computeFinals=function() {
-    $scope.rapper1Score = $scope.Battle.scoreForRapper(1);
-    $scope.rapper2Score = $scope.Battle.scoreForRapper(2);
-    $scope.rapper1Name=$scope.Battle.rapper1;
-    $scope.rapper2Name=$scope.Battle.rapper2;
+    $scope.rapper1Score = Battle.scoreForRapper(1);
+    $scope.rapper2Score = Battle.scoreForRapper(2);
+    $scope.rapper1Name=Battle.rapper1;
+    $scope.rapper2Name=Battle.rapper2;
 
-    if($scope.rapper1Score == $scope.rapper2Score) {
-      $scope.winner = "TIE!";
-    } else if($scope.rapper1Score > $scope.rapper2Score) {
-      $scope.winner = $scope.Battle.rapper1;
-    } else {
-      $scope.winner = $scope.Battle.rapper2;
-    }
+    $scope.winner = Battle.getWinner();
+  };
+
+  var starsElementFor = function(category, i){
+    return angular.element( document.querySelector( "#" + category + "-" + i ) );
   };
 
 };

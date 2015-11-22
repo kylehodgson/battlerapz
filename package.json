@@ -1,0 +1,22 @@
+{
+  "name": "battlerap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylehodgson/battlerapz.git"
+  },
+  "author": "Kyle Hodgson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylehodgson/battlerapz/issues"
+  },
+  "homepage": "https://github.com/kylehodgson/battlerapz#readme",
+  "dependencies": {
+    "protractor": "^3.0.0"
+  }
+}

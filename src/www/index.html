@@ -20,7 +20,6 @@
             <h1>BARS</h1>
         </div>
         <div data-role="content">
-            <h2>Enter rappers</h2>
             <div data-role="fieldcontain">
                 <label for="r1name">Rapper one name:</label>
                 <input type="text" id="r1name" ng-model="rapper1" />
@@ -35,7 +34,7 @@
             <a data-role="button" id="r1win" data-iconpos="right"
                ng-click="startBattle(rapper1,rapper2)" href="#punches">Rapper one</a>
             <a data-role="button" id="r2win" data-iconpos="right"
-               ng-click="startBattle(rapper1,rapper2)" href="#punches">Rapper two</a>
+               ng-click="startBattle(rapper2,rapper1)" href="#punches">Rapper two</a>
         </div>
     </div>
     <div data-role="page" id="punches" >
@@ -43,10 +42,10 @@
             <h1>Header</h1>
         </div>
         <div data-role="content">
-            <p>Scoring punches for {{rapperName}} round {{Battle.round}}</p>
+            <p>Scoring punches for {{rapperName}} round {{getRound()}}</p>
             <a ng-click="addPunch()"><img id="btnPunch" src="punch.png"
                                           width="300" style="display: block; margin: 0 auto" /></a>
-            <a data-role="button" href="#scoreperformance" ng-click="addCategoriesForRound()">Round Finished</a>
+            <a data-role="button" href="#scoreperformance" >Round Finished</a>
         </div>
     </div>
     <div data-role="page" id="scoreperformance" >
@@ -101,14 +100,12 @@
             <h1>Header</h1>
         </div>
         <div data-role="content">
-            <h1>{{winner}} wins!</h1>
+            <h1>Winner: {{winner}} !</h1>
             <p>{{rapper1Name}} score: {{rapper1Score}}</p>
             <p>{{rapper2Name}} score: {{rapper2Score}}</p>
-
         </div>
     </div>
 </div>
 
-</body>
 </body>
 </html>
