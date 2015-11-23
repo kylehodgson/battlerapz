@@ -53,42 +53,7 @@
             <h1>Performance</h1>
         </div>
         <div data-role="content" class="ui-grid-a">
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Rapping</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="rapping-{{stars}}" ng-click="setScore('rapping',stars)">☆ </a>
-            </div>
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Jokes</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="jokes-{{stars}}" ng-click="setScore('jokes',stars)">☆ </a>
-            </div>
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Aggression</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="aggression-{{stars}}" ng-click="setScore('aggression',stars)">☆ </a>
-            </div>
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Delivery</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="delivery-{{stars}}" ng-click="setScore('delivery',stars)">☆ </a>
-            </div>
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Cleverness</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="cleverness-{{stars}}" ng-click="setScore('cleverness',stars)">☆ </a>
-            </div>
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Antics</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="antics-{{stars}}" ng-click="setScore('antics',stars)">☆ </a>
-            </div>
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Freshness</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px">
-                <a ng-repeat="stars in [1,2,3,4,5]" id="freshness-{{stars}}" ng-click="setScore('freshness',stars)">☆ </a>
-            </div>
-
-            <h4 class="ui-block-a">Subtract errors</h4>
-
-            <div class="ui-block-a" style="width: 35%; font-size:18px">Errors</div>
-            <div class="ui-block-b" style="width: 65%; font-size:24px; font-color:red">
-                <a ng-repeat="minuses in [1,2,3,4,5,6,7,8,9,10]" id="errors-{{minuses}}" ng-click="setErrors('errors',minuses)">- </a>
-            </div>
-
+            <performance-scores></performance-scores>
             <div class="ui-block-a" style="width: 100%">
                 <a data-role="button" ng-click="nextRound()" href="#punches">Next Round</a>
                 <a data-role="button" ng-click="computeFinals()" href="#finishedbattle">Finish Battle</a>
