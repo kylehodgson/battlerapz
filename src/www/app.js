@@ -104,6 +104,7 @@ BattleTapez.MobileController = function($scope, Battle) {
   };
 
   $scope.addPunch = function() {
+    shakeImage(20,100);
     var time = Date.now();
     console.log("added a punch for round " + Battle.round + " with time " + time + " for rapper " + Battle.currentRapperName());
     Battle.addPunch( {rapper: Battle.currentRapperName(), round: Battle.round, time: time});
@@ -161,6 +162,21 @@ BattleTapez.MobileController = function($scope, Battle) {
     return angular.element( document.querySelector( "#" + category + "-" + i ) );
   };
 
+  var shakeImage = function(degrees,timer) {
+      var $element = angular.element(document.querySelector("#btnPunch"));
+      $element.css('transition', '-webkit-transform 800ms ease');
+
+      var rotate = function() {
+          $element.css('-webkit-transform', 'rotate(' + degrees + 'deg)');
+          setTimeout(unRotate, timer);
+      };
+
+      var unRotate = function() {
+          $element.css('-webkit-transform', 'rotate(0deg)');
+      }
+
+      rotate();
+  }
 };
 
 BattleTapez.PerformanceScoresDirective = function() {
@@ -170,7 +186,7 @@ BattleTapez.PerformanceScoresDirective = function() {
   };
 };
 
-BattleTapez.BARS = angular.module("bars", ['ngRoute']);
+BattleTapez.BARS = angular.module("bars", ['ngAnimate']);
 BattleTapez.BARS.factory("Battle", BattleTapez.BattleService);
 BattleTapez.BARS.controller("mobileCtrl", BattleTapez.MobileController);
 BattleTapez.BARS.directive("performanceScores",BattleTapez.PerformanceScoresDirective);
