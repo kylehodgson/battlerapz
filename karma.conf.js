@@ -22,6 +22,8 @@ module.exports = function(config) {
         'bower_components/angular-mocks/angular-mocks.js',
         'src/www/BattleService.js',
         'src/www/MobileController.js',
+        'src/www/PerformanceScoresDirective.js',
+        'src/www/TwitterService.js',
         'src/www/app.js',
         'specs/*.js'
     ],
