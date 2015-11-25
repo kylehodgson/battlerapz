@@ -8,6 +8,8 @@
     <script type="text/javascript" src="lib/jquery.mobile-1.1.0.js"></script>
     <script type="text/javascript" src="lib/angular.js"></script>
     <script type="text/javascript" src="lib/angular-animate.js"></script>
+    <script src="BattleService.js"></script>
+    <script src="MobileController.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.structure-1.1.0.css">
     <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.theme-1.1.0.css">
@@ -70,6 +72,11 @@
             <h1>Winner: {{winner}} !</h1>
             <p>{{rapper1Name}} score: {{rapper1Score}}</p>
             <p>{{rapper2Name}} score: {{rapper2Score}}</p>
+            <div data-role="fieldcontain">
+                <label for="txtTweet">Tweet this:</label>
+                <input type="text" id="txtTweet" ng-model="tweet.text" />
+            </div>
+            <button>Tweet this score</button>
         </div>
     </div>
 </div>

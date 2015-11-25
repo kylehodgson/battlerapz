@@ -15,10 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'src/www/lib/jquery-1.6.4.js',
+        //'src/www/lib/jquery.mobile-1.1.0.js',
         'src/www/lib/angular.js',
-        'bower_components/angular-route/angular-route.js',
+        'src/www/lib/angular-animate.js',
         'bower_components/angular-mocks/angular-mocks.js',
-        'src/**/*.js',
+        'src/www/BattleService.js',
+        'src/www/MobileController.js',
+        'src/www/app.js',
         'specs/*.js'
     ],
 
@@ -66,4 +70,4 @@ module.exports = function(config) {
     // how many browser should be started simultanous
     concurrency: Infinity
   })
-}
+};

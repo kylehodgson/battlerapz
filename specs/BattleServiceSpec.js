@@ -4,13 +4,14 @@ describe("BattleService", function() {
     var testRapper1 = "rapper one";
     var testRapper2 = "rapper two";
 
-    afterEach(function() {
-        svc = BattleTapez.BattleService();
-    });
-
     beforeEach(function() {
         svc = BattleTapez.BattleService();
         svc.startBattle(testRapper1, testRapper2);
+    });
+
+    it("Can start battles",function() {
+        expect(svc.rapper).toBe(1);
+        expect(svc.round).toBe(1);
     });
 
     it("Can return the current rapper's name", function() {
@@ -98,5 +99,64 @@ describe("BattleService", function() {
 
         // ACT & ASSERT
         expect(svc.getWinner()).toBe("TIE");
+        expect(svc.winComparison()).toBe("0-0");
     });
+
+    it("Can specify how many rounds a rapper won", function() {
+        // first rapper first round
+        svc.addPunch({});
+        svc.addPunch({});
+
+        // second rapper first round
+        svc.nextRapper();
+
+        svc.addPunch({});
+
+        // rapper 1 wins
+
+        // first rapper second round
+        svc.nextRound();
+        svc.nextRapper();
+
+        svc.addPunch({});
+        svc.addPunch({});
+
+        // second rapper second round
+        svc.nextRapper();
+
+        svc.addPunch({});
+
+        // rapper 1 wins
+
+        // first rapper second round
+        svc.nextRound();
+        svc.nextRapper();
+
+        svc.addPunch({});
+
+        // second rapper second round
+        svc.nextRapper();
+
+        svc.addPunch({});
+        svc.addPunch({});
+
+        // rapper 2 wins
+
+        expect(svc.winComparison()).toBe("2-1");
+    });
+
+    it("Can get the specific score for a specific rapper for a specific round", function() {
+        svc.addPunch({});
+        svc.addPunch({});
+        expect(svc.scoreForRapperInRound(svc.rapper,0)).toBe(2);
+
+        svc.nextRound();
+        svc.nextRapper();
+
+        svc.addPunch({});
+        svc.addPunch({});
+        svc.addPunch({});
+        expect(svc.scoreForRapperInRound(svc.rapper,1)).toBe(3);
+    });
+
 });

@@ -2,18 +2,16 @@ describe("Mobile Controller", function() {
 
     var testRapper1 = "rapper one";
     var testRapper2 = "rapper two";
-
     var $scope;
-    var controller;
 
     beforeEach(function() {
         module('bars');
     });
 
     beforeEach(inject(function(_$controller_){
-        $controller = _$controller_;
+        var $controller = _$controller_;
         $scope = {};
-        controller = $controller('mobileCtrl',{$scope: $scope});
+        $controller('mobileCtrl',{$scope: $scope});
         $scope.startBattle(testRapper1,testRapper2);
     }));
 
@@ -79,4 +77,23 @@ describe("Mobile Controller", function() {
         expect($scope.rapper1Name).toBe(testRapper1);
         expect($scope.rapper2Name).toBe(testRapper2);
     });
+
+    it("Should compose a tweet for users",function() {
+        // Rapper one ... one punch
+        $scope.addPunch();
+
+        $scope.nextRound();
+
+        // Rapper two ... two punches
+        $scope.addPunch();
+        $scope.addPunch();
+
+        $scope.computeFinals();
+
+        expect($scope.tweet.text).toBe(
+            "Just finished scoring "+testRapper1+" vs "+testRapper2+". "+testRapper2+" wins 0-1, " +
+            "punch score "+testRapper1+": 1, "+testRapper2+": 2 http://battlerapscorer.com"
+        );
+
+    })
 });
