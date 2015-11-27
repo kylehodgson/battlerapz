@@ -5,6 +5,4 @@ BattleTapez.PerformanceScoresDirective = function () {
         restrict: 'E',
         templateUrl: 'partials/performance-scores.html'
     };
-};/**
- * Created by kylehodgson on 11/25/15.
- */
+};

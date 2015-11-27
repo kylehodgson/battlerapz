@@ -20,6 +20,8 @@ module.exports = function(config) {
         'src/www/lib/angular.js',
         'src/www/lib/angular-animate.js',
         'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/jsSHA/src/sha1.js',
+        'bower_components/ng-twitter-api/dist/ng-twitter-api.min.js',
         'src/www/BattleService.js',
         'src/www/MobileController.js',
         'src/www/PerformanceScoresDirective.js',
