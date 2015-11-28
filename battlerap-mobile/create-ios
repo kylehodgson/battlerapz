@@ -1,4 +1,6 @@
 #!/bin/bash
+export PROJECT_NAME=BARS
 cordova build ios --device
 cd platforms/ios/build/device
 /usr/bin/xcrun -sdk iphoneos PackageApplication "$(pwd)/$PROJECT_NAME.app" -o "$(pwd)/$PROJECT_NAME.ipa"
+cd ../../../../

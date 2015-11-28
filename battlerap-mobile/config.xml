@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.battlerapscorer" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>B.A.R.S.</name>
+    <name>BARS</name>
     <description>
-        Battle rap scorer is a smartphone app which allows fans to score a battle rap while keeping their eyes on the action. Battles should be debatable because the performers delivered their best performances and not because an online fan can’t score a battle. The B.A.R.S. app offers an easy to use line by line scoring system as well as overall performance scores. Clearly show how battles were won and were points were scored.
+        B.A.R.S BAttle Rap Scorer is a smartphone app which allows fans to score a battle rap while keeping their eyes on the action. Battles should be debatable because the performers delivered their best performances and not because an online fan can’t score a battle. The B.A.R.S. app offers an easy to use line by line scoring system as well as overall performance scores. Clearly show how battles were won and were points were scored.
     </description>
     <author email="kyle.hodgson@gmail.com" href="http://battlerapscorer.com">
         Kyle Hodgson
