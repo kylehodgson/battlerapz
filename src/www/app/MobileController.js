@@ -21,6 +21,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
     $scope.startBattle = function (rapper1, rapper2) {
         Battle.startBattle(rapper1, rapper2);
+        $scope.punches=0;
         $scope.rapperName = Battle.currentRapperName();
     };
 
