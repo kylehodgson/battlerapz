@@ -2,14 +2,18 @@ BattleTapez = typeof BattleTapez === "undefined" ? {} : BattleTapez;
 
 BattleTapez.MobileController = function ($scope, Battle) {
 
-    const unSelectedStarsColor = '#0000ff';
+    const unSelectedStarsColor = '#2489CE';
     const selectedStarsColor = '#ff0000';
+    const selectedErrorsColor = '#ff0000';
+    const unSelectedErrorsColor = '#2489CE';
     const errorMax = 10;
     const starMax = 5;
     const lastRapper = 2;
     const punchButton = document.querySelector("#btnPunch");
 
     $scope.punches = 0;
+    $scope.rapper1=Battle.rapper1;
+    $scope.rapper2=Battle.rapper2;
 
     $scope.getRound = function () {
         return Battle.round;
@@ -44,12 +48,16 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
         for (var i = 1; i <= errorMax; i++) {
             if (i <= score) {
-                starsElementFor(category, i).css('color', selectedStarsColor);
+                starsElementFor(category, i).css('color', selectedErrorsColor);
             } else {
-                starsElementFor(category, i).css('color', unSelectedStarsColor);
+                starsElementFor(category, i).css('color', unSelectedErrorsColor);
             }
         }
     };
+
+    $scope.getErrors = function () {
+        return Battle.getScoreForCategory('errors');
+    }
 
     $scope.nextRound = function () {
         $scope.punches=0;
