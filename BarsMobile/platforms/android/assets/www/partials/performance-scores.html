@@ -27,9 +27,12 @@
     <a ng-repeat="stars in [1,2,3,4,5]" id="freshness-{{stars}}" ng-click="setScore('freshness',stars)">☆ </a>
 </div>
 
-<p></p>
-<div class="ui-block-a" style="width: 35%; font-size:18px">Chokes</div>
-<div class="ui-block-b" style="width: 65%; font-size:24px; font-color:red">
-    <a ng-repeat="minuses in [1,2,3,4,5]" id="errors-{{minuses}}" ng-click="setErrors('errors',minuses)">x </a>
+<div>Chokes</div>
+
+<div class="ui-block-a" style="width: 35%; font-size:18px">Subtract</div>
+<div class="ui-block-b" style="width: 65%; font-size:24px; font-color:red; margin: 0 auto">
+    <a ng-repeat="chokes in [1,2,3,4,5]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a>
 </div>
+
+<h3 ng-show="getErrors()" >Subtracting {{getErrors()}} points for errors</h3>
 

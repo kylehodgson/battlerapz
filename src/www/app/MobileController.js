@@ -100,6 +100,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $element.css('transition', '-webkit-transform ' + otherTimer + 'ms ease');
 
         var rotate = function () {
+            $element.css('-webkit-transform', 'translateZ(0)');
             $element.css('-webkit-transform', 'rotate(' + degrees + 'deg)');
             setTimeout(unRotate, timer);
         };
