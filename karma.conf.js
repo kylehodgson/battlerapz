@@ -16,18 +16,13 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'src/www/lib/jquery-1.6.4.js',
-        //'src/www/lib/jquery.mobile-1.1.0.js',
         'src/www/lib/angular.js',
         'src/www/lib/angular-animate.js',
+        'src/www/lib/angular-socialshare.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/jsSHA/src/sha1.js',
         'bower_components/ng-twitter-api/dist/ng-twitter-api.min.js',
-        'src/www/app/BattleService.js',
-        'src/www/app/MobileController.js',
-        'src/www/app/PerformanceScoresDirective.js',
-        'src/www/app/HowToScoreDirective.js',
-        'src/www/app/TwitterService.js',
-        'src/www/app/app.js',
+        'src/www/app/*.js',
         'specs/*.js'
     ],
 

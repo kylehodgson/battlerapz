@@ -18,6 +18,14 @@ describe("Mobile Controller", function() {
     it("Exposes the current round", function() {
         expect($scope.getRound()).toBe(1);
     });
+    
+    it("Correctly exposes the current rapper", function() {
+        
+        expect($scope.rapperName()).toBe(testRapper1, "Battle didnt start with correct rapper name");
+        
+        $scope.nextRound();
+        expect($scope.rapperName()).toBe(testRapper2, "Advancing to next round didnt change rapperName to second rapper");
+    })
 
     it("Tracks punches", function() {
         // Rapper one ... one punch
@@ -92,7 +100,7 @@ describe("Mobile Controller", function() {
 
         expect($scope.tweet.text).toBe(
             "Just finished scoring "+testRapper1+" vs "+testRapper2+". "+testRapper2+" wins 0-1, " +
-            "punch score "+testRapper1+": 1, "+testRapper2+": 2 http://battlerapscorer.com"
+            "punch score "+testRapper1+": 1, "+testRapper2+": 2 http://battlerapscorer.com #BattleRap"
         );
 
     })

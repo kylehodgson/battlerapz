@@ -22,7 +22,6 @@ BattleTapez.MobileController = function ($scope, Battle) {
     $scope.startBattle = function (rapper1, rapper2) {
         Battle.startBattle(rapper1, rapper2);
         $scope.punches=0;
-        $scope.rapperName = Battle.currentRapperName();
     };
 
     $scope.addPunch = function () {
@@ -30,6 +29,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $scope.punches++;
         var time = Date.now();
         Battle.addPunch({rapper: Battle.currentRapperName(), round: Battle.round, time: time});
+        navigator.vibrate(300);
     };
 
     $scope.setScore = function (category, score) {
@@ -72,6 +72,10 @@ BattleTapez.MobileController = function ($scope, Battle) {
             }
         });
     };
+    
+    $scope.rapperName = function() {
+        return Battle.currentRapperName();
+    }
 
     $scope.computeFinals = function () {
         $scope.rapper1Score = Battle.scoreForRapper(1);
@@ -83,9 +87,9 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
         $scope.winComparison = Battle.winComparison();
 
-        $scope.tweet = {
-            text: "Just finished scoring "+$scope.rapper1Name+" vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score+" http://battlerapscorer.com"
-        }
+        $scope.tweet =  {
+            text: "Just finished scoring "+$scope.rapper1Name+" vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score+" http://battlerapscorer.com #BattleRap"
+        }     
     };
 
     var starsElementFor = function (category, i) {
