@@ -53,4 +53,5 @@ IOS/www/
 .Spotlight-V100
 .Trashes
 
-.gradle
+.gradle/
+platforms/
