@@ -29,7 +29,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $scope.punches++;
         var time = Date.now();
         Battle.addPunch({rapper: Battle.currentRapperName(), round: Battle.round, time: time});
-        navigator.notification.vibrate(1000);
+        navigator.vibrate(1000);
         
     };
 

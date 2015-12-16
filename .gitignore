@@ -19,6 +19,10 @@ Android/bin/
 Android/gen/
 Android/assets/
 
+plugins/
+platforms/
+platforms
+
 # generated files
 bin/
 gen/
@@ -55,3 +59,5 @@ IOS/www/
 
 .gradle/
 platforms/
+
+BarsMobile/info.txt
