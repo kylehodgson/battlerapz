@@ -39,7 +39,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $scope.punches++;
         var time = Date.now();
         Battle.addPunch({rapper: Battle.currentRapperName(), round: Battle.round, time: time});
-        navigator.vibrate(1000);
+        punchVibration();
         
     };
 
@@ -125,5 +125,10 @@ BattleTapez.MobileController = function ($scope, Battle) {
         };
 
         rotate();
-    }
+    };
+    
+    var punchVibration = function() {
+        DF = window.plugins.deviceFeedback
+        DF.haptic()
+    };
 };
