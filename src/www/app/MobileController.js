@@ -130,7 +130,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
     
     var punchVibration = function() {
         if($scope.vibrateDisabled) return;
-        if(typeof window.plugins.deviceFeedback === "undefined") {
+        if(typeof window.plugins === "undefined") {
             $scope.vibrateDisabled=true;
             return;
         }
