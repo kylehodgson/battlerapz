@@ -14,6 +14,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
     $scope.punches = 0;
     $scope.rapper1=Battle.rapper1;
     $scope.rapper2=Battle.rapper2;
+    $scope.vibrateDisabled=false;
 
     $scope.getRound = function () {
         return Battle.round;
@@ -128,7 +129,12 @@ BattleTapez.MobileController = function ($scope, Battle) {
     };
     
     var punchVibration = function() {
-        DF = window.plugins.deviceFeedback
-        DF.haptic()
+        if($scope.vibrateDisabled) return;
+        if(typeof window.plugins.deviceFeedback === "undefined") {
+            $scope.vibrateDisabled=true;
+            return;
+        }
+        
+        window.plugins.deviceFeedback.haptic()
     };
 };

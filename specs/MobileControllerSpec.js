@@ -5,6 +5,7 @@ describe("Mobile Controller", function() {
     var $scope;
 
     beforeEach(function() {
+        mockDeviceFeedback();
         module('bars');
     });
 
@@ -14,6 +15,15 @@ describe("Mobile Controller", function() {
         $controller('mobileCtrl',{$scope: $scope});
         $scope.startBattle(testRapper1,testRapper2);
     }));
+    
+    function mockDeviceFeedback() {
+        if(typeof window === "undefined") window={}
+        if(typeof window.plugins === "undefined") window.plugins={}
+        if(typeof window.plugins.deviceFeedback === "undefined") window.plugins.deviceFeedback={}
+        window.plugins.deviceFeedback.haptic=function() {
+            //console.log("Buzz!");
+        }
+    }
 
     it("Exposes the current round", function() {
         expect($scope.getRound()).toBe(1);
