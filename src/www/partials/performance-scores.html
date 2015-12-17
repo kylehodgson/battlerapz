@@ -31,7 +31,8 @@
 
 <div class="ui-block-a" style="width: 35%; font-size:18px">Subtract</div>
 <div class="ui-block-b" style="width: 65%; font-size:24px; font-color:red; margin: 0 auto">
-    <a ng-repeat="chokes in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a>
+    <a ng-repeat="chokes in [1,2,3,4,5,6,7,8,9,10]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a> <br>
+    <a ng-repeat="chokes in [11,12,13,14,15,16,17,18,19,20]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a>
 </div>
 
 <h3 ng-show="getErrors()" >Subtracting {{getErrors()}} points for errors</h3>
