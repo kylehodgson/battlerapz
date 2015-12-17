@@ -23,6 +23,16 @@ BattleTapez.MobileController = function ($scope, Battle) {
         Battle.startBattle(rapper1, rapper2);
         $scope.punches=0;
     };
+    
+    $scope.clearBattle = function() {
+        $scope.rapper1Score=0;
+        $scope.rapper2Score=0;
+        $scope.rapper1Name="";
+        $scope.rapper2Name="";
+        $scope.rapper1="";
+        $scope.rapper2="";
+        Battle.clearBattle();
+    };
 
     $scope.addPunch = function () {
         punchAnimation();

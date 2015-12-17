@@ -158,5 +158,22 @@ describe("BattleService", function() {
         svc.addPunch({});
         expect(svc.scoreForRapperInRound(svc.rapper,1)).toBe(3);
     });
+    
+    it("Can clear all scoring data after a battle", function() {
+        svc.addPunch({});
+        svc.addPunch({});
+        
+        svc.nextRapper();
+        
+        svc.addPunch({});
+        
+        expect(svc.scoreForRapper(1)).toBe(2);
+        expect(svc.scoreForRapper(2)).toBe(1);
+        
+        svc.clearBattle();
+        
+        expect(svc.scoreForRapper(1)).toBe(0);
+        expect(svc.scoreForRapper(2)).toBe(0);
+    })
 
 });

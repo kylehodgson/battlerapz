@@ -39,18 +39,18 @@
         <div data-role="content">
             <div data-role="fieldcontain">
                 <label for="r1name">Rapper one name:</label>
-                <input type="text" id="r1name" ng-model="rapper1" />
+                <input type="text" id="r1name" ng-model="rapper1Name" />
             </div>
             <p>Vs.</p>
             <div data-role="fieldcontain">
                 <label for="r2name">Rapper two name:</label>
-                <input type="text" id="r2name" ng-model="rapper2" />
+                <input type="text" id="r2name" ng-model="rapper2Name" />
             </div>
             <div ng-show="rapper1 || rapper2">
             <p>Who is rapping first?</p>
-            <a data-role="button" id="r1win" data-iconpos="right" ng-show="rapper1"
+            <a data-role="button" id="r1win" data-iconpos="right" ng-show="rapper1Name"
                ng-click="startBattle(rapper1,rapper2)" href="#punches">{{rapper1}}</a>
-            <a data-role="button" id="r2win" data-iconpos="right" ng-show="rapper2"
+            <a data-role="button" id="r2win" data-iconpos="right" ng-show="rapper2Name"
                ng-click="startBattle(rapper2,rapper1)" href="#punches">{{rapper2}}</a>
             </div>
         </div>
@@ -92,7 +92,7 @@
             <a twitter href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://battlerapscorer.com" data-text="Just scored a round!" data-size="large" data-hashtags="BattleRap">Tweet</a>
             <h4>Battle breakdown:</h4>
             <final-scores></final-scores>
-            <a data-role="button" href="#startBattle" ng-click="startBattle('','')" data-iconpos="right">New Battle</a>
+            <a data-role="button" href="#startBattle" ng-click="clearBattle()" data-iconpos="right">New Battle</a>
             
         </div>
     </div>

@@ -103,5 +103,33 @@ describe("Mobile Controller", function() {
             "punch score "+testRapper1+": 1, "+testRapper2+": 2 http://battlerapscorer.com #BattleRap"
         );
 
-    })
+    });
+    
+    it("Should clear the previous battle when clearing a battle",function() {
+        // Rapper one ... one punch
+        $scope.addPunch();
+
+        $scope.nextRound();
+
+        // Rapper two ... two punches
+        $scope.addPunch();
+        $scope.addPunch();
+
+        $scope.computeFinals();
+        
+        expect($scope.rapper1Score).toBe(1);
+        expect($scope.rapper2Score).toBe(2);
+        
+        expect($scope.rapper1Name).toBe(testRapper1);
+        expect($scope.rapper2Name).toBe(testRapper2);
+        
+        $scope.clearBattle();
+        
+        expect($scope.rapper1Score).toBe(0);
+        expect($scope.rapper2Score).toBe(0);
+        
+        expect($scope.rapper1Name).toBe("");
+        expect($scope.rapper2Name).toBe("");
+
+    });
 });

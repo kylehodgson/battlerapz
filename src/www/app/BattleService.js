@@ -44,6 +44,13 @@ BattleTapez.BattleService = function () {
                 this.rounds[this.rounds.length - 1].r2punches.push(punch);
             }
         },
+        clearBattle: function() {
+            this.rapper1 = "";
+            this.rapper2 = "";
+            this.rounds = [];
+            this.rapper = 1;
+            this.round = 0;
+        },
         startBattle: function (rapper1, rapper2) {
             this.rapper1 = rapper1;
             this.rapper2 = rapper2;
