@@ -11,7 +11,7 @@
                     <div class="ui-block-c">
                         <span>{{rapper2Name}}</span>
                     </div>
-                    <div ng-repeat="round in [1,2,3]" >
+                    <div ng-repeat="round in battle().listOfRounds()" >
                         <div class="ui-block-a">
                             <h3>Round {{round}}</h3>
                         </div>
@@ -21,37 +21,37 @@
                         <span>Total punches</span>
                         </div>
                         <div class="ui-block-c">
-                            <span>15</span>
+                            <span>{{battle().round(round).rapper(1).punches()}}</span>
                         </div>
                         <div class="ui-block-b">
-                            <span>27</span>
+                            <span>{{battle().round(round).rapper(2).punches()}}</span>
                         </div>
                         <div class="ui-block-a">
                             <span>Total performance</span>
                         </div>
                         <div class="ui-block-c">
-                            <span>14</span>
+                            <span>{{battle().round(round).rapper(1).totalCategoryScore()}}</span>
                         </div>
                         <div class="ui-block-b">
-                            <span>20</span>
+                            <span>{{battle().round(round).rapper(2).totalCategoryScore()}}</span>
                         </div>
                         <div class="ui-block-a">
                             <span>Total score</span>
                         </div>
                         <div class="ui-block-c">
-                            <span>29</span>
+                            <span>{{battle().round(round).rapper(1).total()}}</span>
                         </div>
                         <div class="ui-block-b">
-                            <span>47</span>
+                            <span>{{battle().round(round).rapper(2).total()}}</span>
                         </div>
                         <div class="ui-block-a">
-                            <span>Round 1 winner</span>
+                            <span>Round {{round}} winner</span>
                         </div>
-                        <div class="ui-block-c">
+                        <!--<div class="ui-block-c">
                             <span>0</span>
-                        </div>
-                        <div class="ui-block-b">
-                            <span>1</span>
+                        </div>-->
+                        <div class="ui-block-c">
+                            <span>{{battle().round(round).winner()}}</span>
                         </div>
                     </div>
                 </div>

@@ -106,6 +106,13 @@ BattleTapez.MobileController = function ($scope, Battle) {
     
     $scope.battle = function() {
         return {
+            listOfRounds: function() {
+                        var rounds=Array();
+                        for(var i=0; i <  Battle.rounds.length; i++) {
+                            rounds.push(i+1)
+                        }
+                        return rounds
+            },
             categories: function() {
                 var categoryList=Array();
                 [1,2].forEach( function(rapperIndex) {
@@ -164,9 +171,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
             winner: function() {
                 var r1 = Battle.scoreForRapper(1);
                 var r2 = Battle.scoreForRapper(2);
-                if(r1>r2) return Battle.rapper1;
-                if(r2>r1) return Battle.rapper2;
-                return "TIE";
+                return chooseWinnerForBattle(Battle, r1, r2)
 
             },
             round: function(roundIndex) {
@@ -175,22 +180,38 @@ BattleTapez.MobileController = function ($scope, Battle) {
                         return {
                             punches: function() {
                                 var rapperkey="r" + rapperIndex + "punches";
+                                if(typeof Battle.rounds[roundIndex-1] === "undefined") return 0
                                 return Battle.rounds[roundIndex-1][rapperkey].length;
                             },
                             category: function(categoryName) {
+                                if(typeof Battle.rounds[roundIndex-1] === "undefined") return 0
+                                if(typeof Battle.rounds[roundIndex-1].scores === "undefined") return 0
+                                if(typeof Battle.rounds[roundIndex-1].scores[rapperIndex-1] === "undefined") return 0
+                                if(typeof Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories === "undefined") return 0
+                                if(typeof Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories[categoryName] === "undefined") return 0
                                 return Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories[categoryName];
                             },
                             total: function() {
                                 return Battle.scoreForRapperInRound(rapperIndex,roundIndex-1);
+                            },
+                            totalCategoryScore: function() {
+                                var total = 0
+                                //for(var roundIndex=0;roundIndex<Battle.rounds.length; roundIndex++) {
+                                    if(!(typeof Battle.rounds[roundIndex-1].scores[rapperIndex-1] === "undefined")) {
+                                        var categories = Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories
+                                        Object.keys(categories).forEach(function (category) {
+                                            total += categories[category]
+                                        })
+                                    }
+                                //}
+                                return total
                             }
                         }
                     },
                     winner: function() {
-                                var r1 = Battle.scoreForRapperInRound(1,roundIndex-1);
-                                var r2 = Battle.scoreForRapperInRound(2,roundIndex-1);
-                                if(r1>r2) return Battle.rapper1;
-                                if(r2>r1) return Battle.rapper2;
-                                return "TIE";
+                        var r1 = Battle.scoreForRapperInRound(1,roundIndex-1);
+                        var r2 = Battle.scoreForRapperInRound(2,roundIndex-1);
+                        return chooseWinnerForBattle(Battle, r1, r2)
                    }
                 }
             }
@@ -200,6 +221,12 @@ BattleTapez.MobileController = function ($scope, Battle) {
     var starsElementFor = function (category, i) {
         return angular.element(document.querySelector("#" + category + "-" + i));
     };
+    
+    var chooseWinnerForBattle = function(Battle,r1, r2) {
+        if(r1>r2) return Battle.rapper1;
+        if(r2>r1) return Battle.rapper2;
+        return "TIE";
+    }
 
     var punchAnimation = function () {
         var degrees = 50;

@@ -105,6 +105,7 @@ BattleTapez.BattleService = function () {
         scoreForRapperInRound: function (rapper, round) {
             var score = 0;
             var punchesKey = "r" + rapper + "punches";
+            if(typeof this.rounds[round]==="undefined") return score;
             score += this.rounds[round][punchesKey].length;
             if (!(typeof this.rounds[round].scores[rapper - 1] === "undefined")) {
                 var categories = this.rounds[round].scores[rapper - 1].categories;
