@@ -103,7 +103,100 @@ BattleTapez.MobileController = function ($scope, Battle) {
             text: "Just finished scoring "+$scope.rapper1Name+" vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score+" http://battlerapscorer.com #BattleRap"
         }     
     };
+    
+    $scope.battle = function() {
+        return {
+            categories: function() {
+                var categoryList=Array();
+                [1,2].forEach( function(rapperIndex) {
+                    for(var roundIndex=0; roundIndex< Battle.rounds.length; roundIndex++) {
+                        if(!(typeof Battle.rounds[roundIndex].scores[rapperIndex-1] === "undefined")) {
+                            var categories = Battle.rounds[roundIndex].scores[rapperIndex-1].categories;
+                            Object.keys(categories).forEach(function (category) {
+                                categoryList.push(category)
+                            })
+                        }
+                    }
+                })
+                return categoryList
+            },
+            rapper: function(rapperIndex) {
+                return {
+                    total: function() {
+                        return Battle.scoreForRapper(rapperIndex)
+                    },
+                    punches: function() {
+                        var rapperkey="r" + rapperIndex + "punches";
+                        var punchTotal = 0;
+                        for(var i=0; i< Battle.rounds.length; i++) {
+                            punchTotal += Battle.rounds[i][rapperkey].length;
+                        }
+                        
+                        return punchTotal;
+                    },
+                    category: function(categoryName) {
+                        var catScore = 0;
+                        for(var roundIndex=0;roundIndex<Battle.rounds.length; roundIndex++) {
+                            if(!(typeof Battle.rounds[roundIndex].scores[rapperIndex-1] === "undefined")) {
+                                var categories = Battle.rounds[roundIndex].scores[rapperIndex-1].categories;
+                                var catScoreForRapperInRound = categories[categoryName];
+                                if(!(typeof catScoreForRapperInRound === "undefined")){
+                                    catScore += categories[categoryName];
+                                }
+                            }
+                        }
+                        return catScore;
+                    },
+                    totalCategoryScore: function() {
+                        var total = 0;
+                        for(var roundIndex=0;roundIndex<Battle.rounds.length; roundIndex++) {
+                            if(!(typeof Battle.rounds[roundIndex].scores[rapperIndex-1] === "undefined")) {
+                                var categories = Battle.rounds[roundIndex].scores[rapperIndex-1].categories;
+                                Object.keys(categories).forEach(function (category) {
+                                    total += categories[category];
+                                });
+                            }
+                        }
+                        return total
+                    }
+                }
+            },
+            winner: function() {
+                var r1 = Battle.scoreForRapper(1);
+                var r2 = Battle.scoreForRapper(2);
+                if(r1>r2) return Battle.rapper1;
+                if(r2>r1) return Battle.rapper2;
+                return "TIE";
 
+            },
+            round: function(roundIndex) {
+                return {
+                    rapper: function(rapperIndex){
+                        return {
+                            punches: function() {
+                                var rapperkey="r" + rapperIndex + "punches";
+                                return Battle.rounds[roundIndex-1][rapperkey].length;
+                            },
+                            category: function(categoryName) {
+                                return Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories[categoryName];
+                            },
+                            total: function() {
+                                return Battle.scoreForRapperInRound(rapperIndex,roundIndex-1);
+                            }
+                        }
+                    },
+                    winner: function() {
+                                var r1 = Battle.scoreForRapperInRound(1,roundIndex-1);
+                                var r2 = Battle.scoreForRapperInRound(2,roundIndex-1);
+                                if(r1>r2) return Battle.rapper1;
+                                if(r2>r1) return Battle.rapper2;
+                                return "TIE";
+                   }
+                }
+            }
+        }
+    };
+    
     var starsElementFor = function (category, i) {
         return angular.element(document.querySelector("#" + category + "-" + i));
     };

@@ -142,4 +142,107 @@ describe("Mobile Controller", function() {
         expect($scope.rapper2Name).toBe("");
 
     });
+    
+    it("Should report extensive scoring upon completion of the battle",function() {
+        
+        // ROUND 1 (Rapper 2 wins)
+        // Rapper one ... one punch
+        $scope.addPunch();
+        $scope.setScore('jokes',3)
+
+        $scope.nextRound();
+
+        // Rapper two ... two punches
+        $scope.addPunch();
+        $scope.addPunch();
+        $scope.setScore('jokes',4)
+        
+        // ROUND 2 (Tie)
+        $scope.nextRound();
+        
+        // Rapper one ... one punch
+        $scope.addPunch();
+
+        $scope.nextRound();
+        
+        // Rapper two ... one punch
+        $scope.addPunch();
+        
+        // ROUND 3 (Rapper 1 wins)
+        $scope.nextRound();
+        
+        // Rapper one ... two punches
+        $scope.addPunch();
+        $scope.addPunch();
+
+        $scope.nextRound();
+        
+        // Rapper two ... one punch
+        $scope.addPunch();
+        
+        // ROUND 4 (Rapper 1 wins)
+        $scope.nextRound();
+        
+        // Rapper one ... four punches
+        $scope.addPunch();
+        $scope.addPunch();
+        $scope.addPunch();
+        $scope.addPunch();
+
+        $scope.nextRound();
+        
+        // Rapper two ... one punch
+        $scope.addPunch();
+        
+        $scope.computeFinals();
+        
+        
+        expect($scope.winner).toBe(testRapper1)
+        expect($scope.rapper1Score).toBe(11)
+        expect($scope.rapper2Score).toBe(9)
+        expect($scope.rapper1Name).toBe(testRapper1)
+        expect($scope.rapper2Name).toBe(testRapper2)
+
+        // per rapper
+        // per round: punch scores
+        expect($scope.battle().round(1).rapper(1).punches()).toBe(1) 
+        expect($scope.battle().round(1).rapper(2).punches()).toBe(2)
+        
+        // per round: performance scores
+        expect($scope.battle().round(1).rapper(1).category('jokes')).toBe(3) 
+        expect($scope.battle().round(1).rapper(2).category('jokes')).toBe(4) 
+        
+        // per round: total scores
+        expect($scope.battle().round(1).rapper(1).total()).toBe(4)
+        expect($scope.battle().round(1).rapper(2).total()).toBe(6)
+        
+        // round winner
+        expect($scope.battle().round(1).winner()).toBe(testRapper2)
+        expect($scope.battle().round(2).winner()).toBe("TIE")
+        expect($scope.battle().round(3).winner()).toBe(testRapper1)
+        expect($scope.battle().round(4).winner()).toBe(testRapper1)
+        
+        // per rapper
+        // overall scores
+        expect($scope.battle().rapper(1).total()).toBe(11)
+        expect($scope.battle().rapper(2).total()).toBe(9)
+        
+        // overall winner by rounds won
+        expect($scope.battle().winner()).toBe(testRapper1)
+        
+        // overall punch score
+        expect($scope.battle().rapper(1).punches()).toBe(8)
+        expect($scope.battle().rapper(2).punches()).toBe(5)
+        
+        // per category: category score
+        $scope.battle().categories().forEach(function(categoryName) {
+            expect($scope.battle().rapper(1).category(categoryName)).toBe(3)
+            expect($scope.battle().rapper(2).category(categoryName)).toBe(4)
+        });
+        
+        // total of all categories
+        expect($scope.battle().rapper(1).totalCategoryScore()).toBe(3)
+        expect($scope.battle().rapper(2).totalCategoryScore()).toBe(4)
+        
+    })
 });
