@@ -32,7 +32,15 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $scope.rapper2Name="";
         $scope.rapper1="";
         $scope.rapper2="";
+        
+        $scope.battle().categories().forEach(function(category) {
+            for (var i = 1; i <= starMax; i++) {
+                starElementFor(category, i).css('color', unSelectedStarsColor);
+            }
+        })
+        
         Battle.clearBattle();
+        
     };
 
     $scope.addPunch = function () {
@@ -49,9 +57,9 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
         for (var i = 1; i <= starMax; i++) {
             if (i <= score) {
-                starsElementFor(category, i).css('color', selectedStarsColor);
+                starElementFor(category, i).css('color', selectedStarsColor);
             } else {
-                starsElementFor(category, i).css('color', unSelectedStarsColor);
+                starElementFor(category, i).css('color', unSelectedStarsColor);
             }
         }
     };
@@ -61,9 +69,9 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
         for (var i = 1; i <= errorMax; i++) {
             if (i <= score) {
-                starsElementFor(category, i).css('color', selectedErrorsColor);
+                starElementFor(category, i).css('color', selectedErrorsColor);
             } else {
-                starsElementFor(category, i).css('color', unSelectedErrorsColor);
+                starElementFor(category, i).css('color', unSelectedErrorsColor);
             }
         }
     };
@@ -80,7 +88,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
         Battle.nextRapper();
         Object.keys(Battle.getCategories()).forEach(function (category) {
             for (var i = 1; i <= starMax; i++) {
-                starsElementFor(category, i).css('color', unSelectedStarsColor);
+                starElementFor(category, i).css('color', unSelectedStarsColor);
             }
         });
     };
@@ -107,11 +115,47 @@ BattleTapez.MobileController = function ($scope, Battle) {
     $scope.battle = function() {
         return {
             listOfRounds: function() {
-                        var rounds=Array();
-                        for(var i=0; i <  Battle.rounds.length; i++) {
-                            rounds.push(i+1)
+                var rounds=Array();
+                for(var i=0; i <  Battle.rounds.length; i++) {
+                    rounds.push(i+1)
+                }
+                return rounds
+            },
+            listOfScoreCategories: function() {
+                return this.listOfCategoriesWithScoresMatching(function(value,index,array){ return value > 0 ?  true : false })
+            },
+            listOfErrorCategories: function() {
+                return this.listOfCategoriesWithScoresMatching(function(value,index,array){ return value < 0 ?  true : false })
+            },
+            listOfCategoriesWithScoresMatching: function(predicate) {
+                var categoryNames=Array();
+                var scoresForCategory=this.scoresForCategory;
+                this.categories().forEach(function(category) {
+                    if(categoryNames.indexOf(category) >= 0) return;
+                    
+                    var matchingScores = scoresForCategory(category).some(predicate)
+                    if(matchingScores) {
+                        categoryNames.push(category)
+                    } 
+                    
+                })
+                return categoryNames
+            },
+            scoresForCategory: function(categoryName) {
+                var categoryScores = Array();
+                [1,2].forEach( function(rapperIndex) {
+                    for(var roundIndex=0; roundIndex< Battle.rounds.length; roundIndex++) {
+                        if(!(typeof Battle.rounds[roundIndex].scores[rapperIndex-1] === "undefined")) {
+                            var categories = Battle.rounds[roundIndex].scores[rapperIndex-1].categories;
+                            Object.keys(categories).forEach(function (category) {
+                                if(category==categoryName) {
+                                    categoryScores.push(categories[category])
+                                }
+                            })
                         }
-                        return rounds
+                    }
+                })
+                return categoryScores
             },
             categories: function() {
                 var categoryList=Array();
@@ -138,9 +182,27 @@ BattleTapez.MobileController = function ($scope, Battle) {
                         for(var i=0; i< Battle.rounds.length; i++) {
                             punchTotal += Battle.rounds[i][rapperkey].length;
                         }
-                        
                         return punchTotal;
                     },
+                    roundsWon: function() {
+                        var roundsWon=0
+                        for(var roundIndex=0; roundIndex< Battle.rounds.length; roundIndex++) {
+                            if(!(typeof Battle.rounds[roundIndex].scores[rapperIndex-1] === "undefined")) {
+                                var otherRapperIndex=0
+                                if(rapperIndex==1) {
+                                    otherRapperIndex=2
+                                } else {
+                                    otherRapperIndex=1
+                                }
+                                var rapperScore = Battle.scoreForRapperInRound(rapperIndex,roundIndex)
+                                var otherRapperScore = Battle.scoreForRapperInRound(otherRapperIndex,roundIndex)
+                                if(rapperScore>otherRapperScore) {
+                                    roundsWon++
+                                }
+                            }
+                        }
+                        return roundsWon 
+                    }, 
                     category: function(categoryName) {
                         var catScore = 0;
                         for(var roundIndex=0;roundIndex<Battle.rounds.length; roundIndex++) {
@@ -196,14 +258,12 @@ BattleTapez.MobileController = function ($scope, Battle) {
                             },
                             totalCategoryScore: function() {
                                 var total = 0
-                                //for(var roundIndex=0;roundIndex<Battle.rounds.length; roundIndex++) {
-                                    if(!(typeof Battle.rounds[roundIndex-1].scores[rapperIndex-1] === "undefined")) {
-                                        var categories = Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories
-                                        Object.keys(categories).forEach(function (category) {
-                                            total += categories[category]
-                                        })
-                                    }
-                                //}
+                                if(!(typeof Battle.rounds[roundIndex-1].scores[rapperIndex-1] === "undefined")) {
+                                    var categories = Battle.rounds[roundIndex-1].scores[rapperIndex-1].categories
+                                    Object.keys(categories).forEach(function (category) {
+                                        total += categories[category]
+                                    })
+                                }
                                 return total
                             }
                         }
@@ -218,7 +278,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
         }
     };
     
-    var starsElementFor = function (category, i) {
+    var starElementFor = function (category, i) {
         return angular.element(document.querySelector("#" + category + "-" + i));
     };
     

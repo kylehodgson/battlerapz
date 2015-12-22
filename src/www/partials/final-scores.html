@@ -61,116 +61,58 @@
                         <span>Overall total score</span>
                     </div>
                     <div class="ui-block-b">
-                        <span>134</span>
+                        <span>{{rapper1Score}}</span>
                     </div>
                     <div class="ui-block-c">
-                        <span>127</span>
+                        <span>{{rapper2Score}}</span>
                     </div>
                     <div class="ui-block-a">
                         <span>Overall winner by rounds</span>
                     </div>
                     <div class="ui-block-b">
-                        <span>2</span>
+                        <span>{{battle().rapper(1).roundsWon()}}</span>
                     </div>
                     <div class="ui-block-c">
-                        <span>1</span>
+                        <span>{{battle().rapper(2).roundsWon()}}</span>
                     </div>
                     <div class="ui-block-a">
                         <span>Overall punch score</span>
                     </div>
                     <div class="ui-block-b">
-                        <span>90</span>
+                        <span>{{battle().rapper(1).punches()}}</span>
                     </div>
                     <div class="ui-block-c">
-                        <span>82</span>
+                        <span>{{battle().rapper(2).punches()}}</span>
                     </div>
                     <div class="ui-block-a">
                         <span>Overall score by performance and by attribute</span>
                     </div>
                     <div class="ui-block-b"></div>
                     <div class="ui-block-c"></div>
-                    <div class="ui-block-a">
-                        <span>Jokes</span>
+                    <div ng-repeat="category in battle().listOfScoreCategories()">
+                        <div class="ui-block-a">
+                            <span>{{category}}</span>
+                        </div>
+                        <div class="ui-block-b">
+                            <span>{{battle().rapper(1).category(category)}}</span>
+                        </div>
+                        <div class="ui-block-c">
+                            <span>{{battle().rapper(2).category(category)}}</span>
+                        </div>
                     </div>
-                    <div class="ui-block-b">
-                        <span>8</span>
+                    
+                    <div ng-repeat="category in battle().listOfErrorCategories()">
+                        <div class="ui-block-a">
+                            <span>{{category}}</span>
+                        </div>
+                        <div class="ui-block-b">
+                            <span>{{battle().rapper(1).category(category) * -1 }}</span>
+                        </div>
+                        <div class="ui-block-c">
+                            <span>{{battle().rapper(2).category(category) * -1 }}</span>
+                        </div>    
                     </div>
-                    <div class="ui-block-c">
-                        <span>10</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Rapping</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>12</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>20</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Aggression</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>6</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>6</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Delivery</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span></span>
-                        <span>2</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>7</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Strategy</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>4</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>3</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Schemes</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>8</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>1</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Freshness</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>6</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>8</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Antics</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>3</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>0</span>
-                    </div>
-                    <div class="ui-block-a">
-                        <span>Chokes</span>
-                    </div>
-                    <div class="ui-block-b">
-                        <span>-5</span>
-                    </div>
-                    <div class="ui-block-c">
-                        <span>-10</span>
-                    </div>
+                    
                     <div class="ui-block-a">
                         <span>Total</span>
                     </div>

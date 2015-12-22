@@ -248,6 +248,12 @@ describe("Mobile Controller", function() {
         expect($scope.battle().rapper(1).totalCategoryScore()).toBe(3)
         expect($scope.battle().rapper(2).totalCategoryScore()).toBe(4)
         
+        // overall scores table
+        
+        // rounds won
+        expect($scope.battle().rapper(1).roundsWon()).toBe(2)
+        expect($scope.battle().rapper(2).roundsWon()).toBe(1)
+        
     })
     
     it("Should be able to initialize without complaining about undefined values in the data structure",function() {
@@ -297,14 +303,42 @@ describe("Mobile Controller", function() {
     })
     
     it("can return a list of rounds suitable for a repeater",function() {
-        // Round One
-        $scope.nextRound()
-        $scope.nextRound()
+        // We start at Round One
         
         // Round Two
         $scope.nextRound()
         $scope.nextRound()
         
+        // Round Three
+        $scope.nextRound()
+        $scope.nextRound()
+        
         expect($scope.battle().listOfRounds()).toEqual([1,2,3])
+    })
+    
+    it("can return a list of categories suitable for a repeater",function() {
+        $scope.setScore('cat1',1)
+        $scope.setScore('cat2',2)
+        $scope.setScore('cat3',3)
+        $scope.setScore('error',-4)
+        $scope.nextRound()
+        $scope.setScore('cat1',1)
+        $scope.setScore('cat2',2)
+        $scope.setScore('cat3',3)
+        $scope.setScore('error',-4)
+        $scope.nextRound()
+        
+        $scope.setScore('cat1',1)
+        $scope.setScore('cat2',2)
+        $scope.setScore('cat3',3)
+        $scope.setScore('error',-4)
+        $scope.nextRound()
+        $scope.setScore('cat1',1)
+        $scope.setScore('cat2',2)
+        $scope.setScore('cat3',3)
+        $scope.setScore('error',-4)
+        
+        expect($scope.battle().listOfScoreCategories()).toEqual(['cat1','cat2','cat3'])
+        expect($scope.battle().listOfErrorCategories()).toEqual(['error'])
     })
 });
