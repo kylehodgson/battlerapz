@@ -33,9 +33,15 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $scope.rapper1="";
         $scope.rapper2="";
         
-        $scope.battle().categories().forEach(function(category) {
+        $scope.battle().listOfScoreCategories().forEach(function(category) {
             for (var i = 1; i <= starMax; i++) {
                 starElementFor(category, i).css('color', unSelectedStarsColor);
+            }
+        })
+        
+        $scope.battle().listOfErrorCategories().forEach(function(category) {
+            for (var i = 1; i <= errorMax; i++) {
+                starElementFor(category, i).css('color', unSelectedErrorsColor);
             }
         })
         

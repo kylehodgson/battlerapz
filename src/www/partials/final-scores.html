@@ -45,20 +45,20 @@
                             <span>{{battle().round(round).rapper(2).total()}}</span>
                         </div>
                         <div class="ui-block-a">
-                            <span>Round {{round}} winner</span>
+                            <span>Round {{round}} winner:</span>
                         </div>
-                        <!--<div class="ui-block-c">
-                            <span>0</span>
-                        </div>-->
                         <div class="ui-block-c">
-                            <span>{{battle().round(round).winner()}}</span>
+                            <h5 ng-show="battle().round(round).winner() == rapper1Name">{{rapper1Name}} wins!</h5>
+                        </div>
+                        <div class="ui-block-b">
+                            <h5 ng-show="battle().round(round).winner() == rapper2Name">{{rapper2Name}}wins! </h5>
                         </div>
                     </div>
                 </div>
                 <h3>Overall Scores</h3>
                 <div class="ui-grid-b">
                     <div class="ui-block-a">
-                        <span>Overall total score</span>
+                        <span>Total score</span>
                     </div>
                     <div class="ui-block-b">
                         <span>{{rapper1Score}}</span>
@@ -67,7 +67,7 @@
                         <span>{{rapper2Score}}</span>
                     </div>
                     <div class="ui-block-a">
-                        <span>Overall winner by rounds</span>
+                        <span>Winner by rounds</span>
                     </div>
                     <div class="ui-block-b">
                         <span>{{battle().rapper(1).roundsWon()}}</span>
@@ -76,7 +76,7 @@
                         <span>{{battle().rapper(2).roundsWon()}}</span>
                     </div>
                     <div class="ui-block-a">
-                        <span>Overall punch score</span>
+                        <span>Punch score</span>
                     </div>
                     <div class="ui-block-b">
                         <span>{{battle().rapper(1).punches()}}</span>
@@ -85,10 +85,8 @@
                         <span>{{battle().rapper(2).punches()}}</span>
                     </div>
                     <div class="ui-block-a">
-                        <span>Overall score by performance and by attribute</span>
+                        <h5>By attribute</h5>
                     </div>
-                    <div class="ui-block-b"></div>
-                    <div class="ui-block-c"></div>
                     <div ng-repeat="category in battle().listOfScoreCategories()">
                         <div class="ui-block-a">
                             <span>{{category}}</span>
@@ -100,27 +98,36 @@
                             <span>{{battle().rapper(2).category(category)}}</span>
                         </div>
                     </div>
-                    
-                    <div ng-repeat="category in battle().listOfErrorCategories()">
+                    <div class="ui-block-a">
+                        <h5>Chokes</h5>
+                    </div>
+                    <div ng-repeat="error in battle().listOfErrorCategories()">
                         <div class="ui-block-a">
-                            <span>{{category}}</span>
+                            <span>{{error}}</span>
                         </div>
                         <div class="ui-block-b">
-                            <span>{{battle().rapper(1).category(category) * -1 }}</span>
+                            <span>{{battle().rapper(1).category(error)}}</span>
                         </div>
                         <div class="ui-block-c">
-                            <span>{{battle().rapper(2).category(category) * -1 }}</span>
+                            <span>{{battle().rapper(2).category(error)}}</span>
                         </div>    
                     </div>
                     
                     <div class="ui-block-a">
-                        <span>Total</span>
+                        <h5>Total</h5>
                     </div>
                     <div class="ui-block-b">
-                        <span>44</span>
+                        <span></span>
                     </div>
                     <div class="ui-block-c">
-                        <span>45</span>
+                        <span></span>
+                    </div>
+                    
+                    <div class="ui-block-b">
+                        <span>{{battle().rapper(1).total()}}</span>
+                    </div>
+                    <div class="ui-block-c">
+                        <span>{{battle().rapper(2).total()}}</span>
                     </div>
                 </div>
             </div>
