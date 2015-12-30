@@ -19,20 +19,26 @@
     <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.structure-1.1.0.css">
     <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.theme-1.1.0.css">
     <link rel='stylesheet' href="styles/angular-socialshare.min.css">
+    
+    <link rel="stylesheet" href="themes/Themecolour.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body ng-app="bars">
 <div ng-controller="mobileCtrl">
-    <div data-role="page" id="first-page">
+    <div data-role="page" id="first-page" data-theme="a">
         <div data-role="header">
-            <h1>Battle Rap Scorer</h1>
+            <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
-            <h1>B . A . R . S .</h1>
+            <h1>Battle Rap Scorer</h1>
             <a data-role="button" href="#startBattle" data-iconpos="right">Start</a>
             <a data-role="button" href="#howToScore" data-iconpos="right">How To Score</a>
         </div>
     </div>
-    <div data-role="page" id="startBattle" >
+    <div data-role="page" id="startBattle" data-theme="a">
         <div data-role="header">
             <h1>BARS</h1>
         </div>
@@ -55,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div data-role="page" id="punches" >
+    <div data-role="page" id="punches" data-theme="a">
         <div data-role="header">
             <h1>BARS</h1>
         </div>
@@ -69,7 +75,7 @@
             <a data-role="button" href="#scoreperformance" >Round Finished</a>
         </div>
     </div>
-    <div data-role="page" id="scoreperformance" >
+    <div data-role="page" id="scoreperformance" data-theme="a" >
         <div data-role="header">
             <h1>BARS</h1>
         </div>
@@ -81,7 +87,7 @@
             </div>
         </div>
     </div>
-    <div data-role="page" id="finishedbattle" >
+    <div data-role="page" id="finishedbattle" data-theme="a">
         <div data-role="header">
             <h1>BARS</h1>
         </div>
@@ -96,7 +102,7 @@
             
         </div>
     </div>
-    <div data-role="page" id="howToScore" data-theme="c" data-title="How to score">
+    <div data-role="page" id="howToScore" data-theme="a" data-title="How to score">
         <div data-role="header">
             <h1>How To Score</h1>
         </div>
