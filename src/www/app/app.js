@@ -1,6 +1,6 @@
 BattleTapez = typeof BattleTapez === "undefined" ? {} : BattleTapez;
 
-BattleTapez.BARS = angular.module("bars", ['ngAnimate','djds4rce.angular-socialshare']).config(function($locationProvider){
+BattleTapez.BARS = angular.module("bars", ['djds4rce.angular-socialshare']).config(function($locationProvider){
     $locationProvider.html5Mode(true).hashPrefix('!');
 });
 BattleTapez.BARS.factory("Battle", BattleTapez.BattleService);

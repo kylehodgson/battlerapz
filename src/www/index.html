@@ -3,12 +3,11 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,target-densitydpi=device-dpi,user-scalable=0" />
-	<title>BattleTapez</title>
+	<title>B.A.R.S.</title>
     <script type="text/javascript" src="lib/jquery-1.6.4.js"></script>
     <script type="text/javascript" src="lib/jquery.mobile-1.1.0.js"></script>
     <script type="text/javascript" src="lib/angular.js"></script>
-    <script type="text/javascript" src="lib/angular-animate.js"></script>
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script type="text/javascript" src="lib/twitter-widgets.js"></script>
     <script type="text/javascript" src="lib/angular-socialshare.js"></script>
     <script type="text/javascript" src="app/BattleService.js"></script>
     <script type="text/javascript" src="app/MobileController.js"></script>
@@ -18,13 +17,9 @@
     <script type="text/javascript" src="app/app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.structure-1.1.0.css">
     <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.theme-1.1.0.css">
-    <link rel='stylesheet' href="styles/angular-socialshare.min.css">
-    
-    <link rel="stylesheet" href="themes/Themecolour.min.css" />
-    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel='stylesheet' type="text/css" href="styles/angular-socialshare.min.css">
+    <link rel="stylesheet" type="text/css" href="themes/Themecolour.min.css" />
+    <link rel="stylesheet" type="text/css" href="themes/jquery.mobile.icons.min.css" />
 </head>
 <body ng-app="bars">
 <div ng-controller="mobileCtrl">
@@ -33,14 +28,14 @@
             <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
-            <h1>Battle Rap Scorer</h1>
+            <h1>BAttle Rap Scorer</h1>
             <a data-role="button" href="#startBattle" data-iconpos="right">Start</a>
             <a data-role="button" href="#howToScore" data-iconpos="right">How To Score</a>
         </div>
     </div>
     <div data-role="page" id="startBattle" data-theme="a">
         <div data-role="header">
-            <h1>BARS</h1>
+            <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
             <div data-role="fieldcontain">
@@ -63,7 +58,7 @@
     </div>
     <div data-role="page" id="punches" data-theme="a">
         <div data-role="header">
-            <h1>BARS</h1>
+            <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
             <p>Scoring punches for {{rapperName()}} round {{getRound()}}</p>
@@ -77,7 +72,7 @@
     </div>
     <div data-role="page" id="scoreperformance" data-theme="a" >
         <div data-role="header">
-            <h1>BARS</h1>
+            <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content" class="ui-grid-a">
             <performance-scores></performance-scores>
@@ -89,13 +84,26 @@
     </div>
     <div data-role="page" id="finishedbattle" data-theme="a">
         <div data-role="header">
-            <h1>BARS</h1>
+            <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
             <h1>Winner: {{winner}} !</h1>
             <p>{{rapper1Name}} score: {{rapper1Score}}</p>
             <p>{{rapper2Name}} score: {{rapper2Score}}</p>
-            <a twitter href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://battlerapscorer.com" data-text="Just scored a round!" data-size="large" data-hashtags="BattleRap">Tweet</a>
+            <!--<a href="https://twitter.com/share" 
+                class="twitter-share-button"{count} 
+                data-url="http://battlerapscorer.com" 
+                data-text="Just scored a round!" 
+                data-size="large" 
+                data-hashtags="BattleRap">Tweet</a>-->
+            <a twitter  
+                data-lang="en" 
+                data-count='horizontal' 
+                data-url="http://battlerapscorer.com" 
+                data-via='battlerapscorer' 
+                data-size="medium" 
+                data-text="{{tweet}}" 
+                data-hashtags="BattleRap" ></a>
             <h4>Battle breakdown:</h4>
             <final-scores></final-scores>
             <a data-role="button" href="#startBattle" ng-click="clearBattle()" data-iconpos="right">New Battle</a>

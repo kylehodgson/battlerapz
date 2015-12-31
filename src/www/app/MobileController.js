@@ -113,9 +113,11 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
         $scope.winComparison = Battle.winComparison();
 
-        $scope.tweet =  {
-            text: "Just finished scoring "+$scope.rapper1Name+" vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score+" http://battlerapscorer.com #BattleRap"
-        }     
+        $scope.tweet =  "Just finished scoring "+$scope.rapper1Name+" vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score
+        setTimeout(function() {
+            $scope.$apply();
+        })
+        
     };
     
     $scope.battle = function() {

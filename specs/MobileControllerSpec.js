@@ -12,6 +12,9 @@ describe("Mobile Controller", function() {
     beforeEach(inject(function(_$controller_){
         var $controller = _$controller_;
         $scope = {};
+        $scope.$apply=function() {
+            //console.log("applying scope")
+        }
         $controller('mobileCtrl',{$scope: $scope});
         $scope.startBattle(testRapper1,testRapper2);
     }));
@@ -108,9 +111,9 @@ describe("Mobile Controller", function() {
 
         $scope.computeFinals();
 
-        expect($scope.tweet.text).toBe(
+        expect($scope.tweet).toBe(
             "Just finished scoring "+testRapper1+" vs "+testRapper2+". "+testRapper2+" wins 0-1, " +
-            "punch score "+testRapper1+": 1, "+testRapper2+": 2 http://battlerapscorer.com #BattleRap"
+            "punch score "+testRapper1+": 1, "+testRapper2+": 2"
         );
 
     });
