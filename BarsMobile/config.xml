@@ -23,6 +23,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <icon src="res/icon.png" />
     <platform name="ios">
               <!-- iOS 8.0+ -->
               <!-- iPhone 6 Plus  -->
