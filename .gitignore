@@ -3,6 +3,7 @@ node_modules
 .swp
 .idea
 ios
+android
 
 # built application files
 *.apk
