@@ -113,13 +113,17 @@ BattleTapez.MobileController = function ($scope, Battle) {
 
         $scope.winComparison = Battle.winComparison();
 
-        $scope.tweet =  "Just finished scoring "+$scope.rapper1Name+" vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score
+        $scope.tweet =  "Just finished scoring "+$scope.rapper1Name+
+                        " vs "+$scope.rapper2Name+". "+$scope.winner+" wins "+$scope.winComparison+
+                        ", punch score "+$scope.rapper1Name+": "+$scope.rapper1Score+", "+$scope.rapper2Name+": "+$scope.rapper2Score
         setTimeout(function() {
             $scope.$apply();
         })
         
     };
     
+    var positiveValue = function(value,index,array){ return value > 0 ?  true : false }
+    var negativeValue = function(value,index,array){ return value < 0 ?  true : false }
     $scope.battle = function() {
         return {
             listOfRounds: function() {
@@ -130,12 +134,12 @@ BattleTapez.MobileController = function ($scope, Battle) {
                 return rounds
             },
             listOfScoreCategories: function() {
-                return this.listOfCategoriesWithScoresMatching(function(value,index,array){ return value > 0 ?  true : false })
+                return this.categoriesWithScoresHaving(positiveValue)
             },
             listOfErrorCategories: function() {
-                return this.listOfCategoriesWithScoresMatching(function(value,index,array){ return value < 0 ?  true : false })
+                return this.categoriesWithScoresHaving(negativeValue)
             },
-            listOfCategoriesWithScoresMatching: function(predicate) {
+            categoriesWithScoresHaving: function(predicate) {
                 var categoryNames=Array();
                 var scoresForCategory=this.scoresForCategory;
                 this.categories().forEach(function(category) {

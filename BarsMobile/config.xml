@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.battlerapscorer.bars" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.battlerapscorer.bars" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BARS</name>
     <description>
         B.A.R.S BAttle Rap Scorer is a smartphone app which allows fans to score a battle rap while keeping their eyes on the action. Battles should be debatable because the performers delivered their best performances and not because an online fan can’t score a battle. The B.A.R.S. app offers an easy to use line by line scoring system as well as overall performance scores. Clearly show how battles were won and were points were scored.
@@ -45,5 +45,21 @@
               <!-- iPad Spotlight and Settings Icon -->
               <icon src="res/ios/icon-50.png" width="50" height="50" />
               <icon src="res/ios/icon-50@2x.png" width="100" height="100" />
+              <!-- iPad -->
+              <icon src="res/ios/icon-72.png" width="72" height="72" />
+              <icon src="res/ios/icon-72@2x.png" width="144" height="144" />
      </platform>
+     <platform name="ios">
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="res/screen/ios/Default~iphone.png" width="320" height="480"/>
+        <splash src="res/screen/ios/Default@2x~iphone.png" width="640" height="960"/>
+        <splash src="res/screen/ios/Default-Portrait~ipad.png" width="768" height="1024"/>
+        <splash src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
+        <splash src="res/screen/ios/Default-Landscape~ipad.png" width="1024" height="768"/>
+        <splash src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
+        <splash src="res/screen/ios/Default-568h@2x~iphone.png" width="640" height="1136"/>
+        <splash src="res/screen/ios/Default-667h.png" width="750" height="1334"/>
+        <splash src="res/screen/ios/Default-736h.png" width="1242" height="2208"/>
+        <splash src="res/screen/ios/Default-Landscape-736h.png" width="2208" height="1242"/>
+    </platform>
 </widget>
