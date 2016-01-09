@@ -208,54 +208,54 @@ describe("Mobile Controller", function() {
 
         // per rapper
         // per round: punch scores
-        expect($scope.battle().round(1).rapper(1).punches()).toBe(1) 
-        expect($scope.battle().round(1).rapper(2).punches()).toBe(2)
+        expect($scope.battleCalculator().round(1).rapper(1).punches()).toBe(1) 
+        expect($scope.battleCalculator().round(1).rapper(2).punches()).toBe(2)
         
         // per round: performance scores
-        expect($scope.battle().round(1).rapper(1).category('jokes')).toBe(3) 
-        expect($scope.battle().round(1).rapper(2).category('jokes')).toBe(4) 
+        expect($scope.battleCalculator().round(1).rapper(1).category('jokes')).toBe(3) 
+        expect($scope.battleCalculator().round(1).rapper(2).category('jokes')).toBe(4) 
         
         // per round: total performance scores
-        expect($scope.battle().round(1).rapper(1).totalCategoryScore()).toBe(3)
-        expect($scope.battle().round(1).rapper(2).totalCategoryScore()).toBe(4) 
+        expect($scope.battleCalculator().round(1).rapper(1).totalCategoryScore()).toBe(3)
+        expect($scope.battleCalculator().round(1).rapper(2).totalCategoryScore()).toBe(4) 
         
         // per round: total scores
-        expect($scope.battle().round(1).rapper(1).total()).toBe(4)
-        expect($scope.battle().round(1).rapper(2).total()).toBe(6)
+        expect($scope.battleCalculator().round(1).rapper(1).total()).toBe(4)
+        expect($scope.battleCalculator().round(1).rapper(2).total()).toBe(6)
         
         // round winner
-        expect($scope.battle().round(1).winner()).toBe(testRapper2)
-        expect($scope.battle().round(2).winner()).toBe("TIE")
-        expect($scope.battle().round(3).winner()).toBe(testRapper1)
-        expect($scope.battle().round(4).winner()).toBe(testRapper1)
+        expect($scope.battleCalculator().round(1).winner()).toBe(testRapper2)
+        expect($scope.battleCalculator().round(2).winner()).toBe("TIE")
+        expect($scope.battleCalculator().round(3).winner()).toBe(testRapper1)
+        expect($scope.battleCalculator().round(4).winner()).toBe(testRapper1)
         
         // per rapper
         // overall scores
-        expect($scope.battle().rapper(1).total()).toBe(11)
-        expect($scope.battle().rapper(2).total()).toBe(9)
+        expect($scope.battleCalculator().rapper(1).total()).toBe(11)
+        expect($scope.battleCalculator().rapper(2).total()).toBe(9)
         
         // overall winner by rounds won
-        expect($scope.battle().winner()).toBe(testRapper1)
+        expect($scope.battleCalculator().winner()).toBe(testRapper1)
         
         // overall punch score
-        expect($scope.battle().rapper(1).punches()).toBe(8)
-        expect($scope.battle().rapper(2).punches()).toBe(5)
+        expect($scope.battleCalculator().rapper(1).punches()).toBe(8)
+        expect($scope.battleCalculator().rapper(2).punches()).toBe(5)
         
         // per category: category score
-        $scope.battle().categories().forEach(function(categoryName) {
-            expect($scope.battle().rapper(1).category(categoryName)).toBe(3)
-            expect($scope.battle().rapper(2).category(categoryName)).toBe(4)
+        $scope.battleCalculator().categories().forEach(function(categoryName) {
+            expect($scope.battleCalculator().rapper(1).category(categoryName)).toBe(3)
+            expect($scope.battleCalculator().rapper(2).category(categoryName)).toBe(4)
         });
         
         // total of all categories
-        expect($scope.battle().rapper(1).totalCategoryScore()).toBe(3)
-        expect($scope.battle().rapper(2).totalCategoryScore()).toBe(4)
+        expect($scope.battleCalculator().rapper(1).totalCategoryScore()).toBe(3)
+        expect($scope.battleCalculator().rapper(2).totalCategoryScore()).toBe(4)
         
         // overall scores table
         
         // rounds won
-        expect($scope.battle().rapper(1).roundsWon()).toBe(2)
-        expect($scope.battle().rapper(2).roundsWon()).toBe(1)
+        expect($scope.battleCalculator().rapper(1).roundsWon()).toBe(2)
+        expect($scope.battleCalculator().rapper(2).roundsWon()).toBe(1)
         
     })
     
@@ -264,45 +264,45 @@ describe("Mobile Controller", function() {
 
         // per rapper
         // per round: punch scores
-        expect($scope.battle().round(1).rapper(1).punches()).toBe(0) 
-        expect($scope.battle().round(1).rapper(2).punches()).toBe(0)
+        expect($scope.battleCalculator().round(1).rapper(1).punches()).toBe(0) 
+        expect($scope.battleCalculator().round(1).rapper(2).punches()).toBe(0)
         
         // per round: performance scores
-        expect($scope.battle().round(1).rapper(1).category('jokes')).toBe(0)
-        expect($scope.battle().round(1).rapper(2).category('jokes')).toBe(0) 
+        expect($scope.battleCalculator().round(1).rapper(1).category('jokes')).toBe(0)
+        expect($scope.battleCalculator().round(1).rapper(2).category('jokes')).toBe(0) 
 
         // per round: total performance scores
-        expect($scope.battle().round(1).rapper(1).totalCategoryScore()).toBe(0)
-        expect($scope.battle().round(1).rapper(2).totalCategoryScore()).toBe(0) 
+        expect($scope.battleCalculator().round(1).rapper(1).totalCategoryScore()).toBe(0)
+        expect($scope.battleCalculator().round(1).rapper(2).totalCategoryScore()).toBe(0) 
         
         // per round: total scores
-        expect($scope.battle().round(1).rapper(1).total()).toBe(0)
-        expect($scope.battle().round(1).rapper(2).total()).toBe(0)
+        expect($scope.battleCalculator().round(1).rapper(1).total()).toBe(0)
+        expect($scope.battleCalculator().round(1).rapper(2).total()).toBe(0)
         
         // round winner
-        expect($scope.battle().round(1).winner()).toBe("TIE")
+        expect($scope.battleCalculator().round(1).winner()).toBe("TIE")
         
         // per rapper
         // overall scores
-        expect($scope.battle().rapper(1).total()).toBe(0)
-        expect($scope.battle().rapper(2).total()).toBe(0)
+        expect($scope.battleCalculator().rapper(1).total()).toBe(0)
+        expect($scope.battleCalculator().rapper(2).total()).toBe(0)
         
         // overall winner by rounds won
-        expect($scope.battle().winner()).toBe("TIE")
+        expect($scope.battleCalculator().winner()).toBe("TIE")
         
         // overall punch score
-        expect($scope.battle().rapper(1).punches()).toBe(0)
-        expect($scope.battle().rapper(2).punches()).toBe(0)
+        expect($scope.battleCalculator().rapper(1).punches()).toBe(0)
+        expect($scope.battleCalculator().rapper(2).punches()).toBe(0)
         
         // per category: category score
-        $scope.battle().categories().forEach(function(categoryName) {
-            expect($scope.battle().rapper(1).category(categoryName)).toBe(0)
-            expect($scope.battle().rapper(2).category(categoryName)).toBe(0)
+        $scope.battleCalculator().categories().forEach(function(categoryName) {
+            expect($scope.battleCalculator().rapper(1).category(categoryName)).toBe(0)
+            expect($scope.battleCalculator().rapper(2).category(categoryName)).toBe(0)
         });
         
         // total of all categories
-        expect($scope.battle().rapper(1).totalCategoryScore()).toBe(0)
-        expect($scope.battle().rapper(2).totalCategoryScore()).toBe(0)
+        expect($scope.battleCalculator().rapper(1).totalCategoryScore()).toBe(0)
+        expect($scope.battleCalculator().rapper(2).totalCategoryScore()).toBe(0)
     })
     
     it("can return a list of rounds suitable for a repeater",function() {
@@ -316,7 +316,7 @@ describe("Mobile Controller", function() {
         $scope.nextRound()
         $scope.nextRound()
         
-        expect($scope.battle().listOfRounds()).toEqual([1,2,3])
+        expect($scope.battleCalculator().listOfRounds()).toEqual([1,2,3])
     })
     
     it("can return a list of categories suitable for a repeater",function() {
@@ -341,7 +341,7 @@ describe("Mobile Controller", function() {
         $scope.setScore('cat3',3)
         $scope.setScore('error',-4)
         
-        expect($scope.battle().listOfScoreCategories()).toEqual(['cat1','cat2','cat3'])
-        expect($scope.battle().listOfErrorCategories()).toEqual(['error'])
+        expect($scope.battleCalculator().listOfScoreCategories()).toEqual(['cat1','cat2','cat3'])
+        expect($scope.battleCalculator().listOfErrorCategories()).toEqual(['error'])
     })
 });

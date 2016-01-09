@@ -30,8 +30,8 @@
         </div>
         <div data-role="content">
             <h1>BAttle Rap Scorer</h1>
-            <a data-role="button" href="#startBattle" data-iconpos="right">Start</a>
-            <a data-role="button" href="#howToScore" data-iconpos="right">How To Score</a>
+            <a data-role="button" href="#startBattle" data-iconpos="right" id="btn-start-battle">Start</a>
+            <a data-role="button" href="#howToScore" data-iconpos="right" id="btn-how-to-score">How To Score</a>
         </div>
     </div>
     <div data-role="page" id="startBattle" data-theme="a">
@@ -50,9 +50,9 @@
             </div>
             <div ng-show="rapper1Name || rapper2Name">
             <p>Who is rapping first?</p>
-            <a data-role="button" id="r1win" data-iconpos="right" ng-show="rapper1Name"
+            <a data-role="button" id="btn-r1-start" data-iconpos="right" ng-show="rapper1Name"
                ng-click="startBattle(rapper1Name,rapper2Name)" href="#punches">{{rapper1Name}}</a>
-            <a data-role="button" id="r2win" data-iconpos="right" ng-show="rapper2Name"
+            <a data-role="button" id="btn-r2-start" data-iconpos="right" ng-show="rapper2Name"
                ng-click="startBattle(rapper2Name,rapper1Name)" href="#punches">{{rapper2Name}}</a>
             </div>
         </div>

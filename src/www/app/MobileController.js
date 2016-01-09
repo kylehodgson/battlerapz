@@ -33,13 +33,13 @@ BattleTapez.MobileController = function ($scope, Battle) {
         $scope.rapper1="";
         $scope.rapper2="";
         
-        $scope.battle().listOfScoreCategories().forEach(function(category) {
+        $scope.battleCalculator().listOfScoreCategories().forEach(function(category) {
             for (var i = 1; i <= starMax; i++) {
                 starElementFor(category, i).css('color', unSelectedStarsColor);
             }
         })
         
-        $scope.battle().listOfErrorCategories().forEach(function(category) {
+        $scope.battleCalculator().listOfErrorCategories().forEach(function(category) {
             for (var i = 1; i <= errorMax; i++) {
                 starElementFor(category, i).css('color', unSelectedErrorsColor);
             }
@@ -124,7 +124,7 @@ BattleTapez.MobileController = function ($scope, Battle) {
     
     var positiveValue = function(value,index,array){ return value > 0 ?  true : false }
     var negativeValue = function(value,index,array){ return value < 0 ?  true : false }
-    $scope.battle = function() {
+    $scope.battleCalculator = function() {
         return {
             listOfRounds: function() {
                 var rounds=Array();
