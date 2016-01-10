@@ -62,13 +62,13 @@
             <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
-            <p>Scoring punches for {{rapperName()}} round {{getRound()}}</p>
+            <p id="punch-scoring-title">Scoring punches for {{rapperName()}} round {{getRound()}}</p>
             <a ng-click="addPunch()"><img id="btnPunch"
                                           src="punch.png"
                                           class="shake"
                                           width="250" /></a>
-            <p>Punches: {{punches}}</p>
-            <a data-role="button" href="#scoreperformance" >Round Finished</a>
+            <p id="punch-tally">Punches: {{punches}}</p>
+            <a id="btn-round-finished" data-role="button" href="#scoreperformance" >Round Finished</a>
         </div>
     </div>
     <div data-role="page" id="scoreperformance" data-theme="a" >
@@ -78,8 +78,8 @@
         <div data-role="content" class="ui-grid-a">
             <performance-scores></performance-scores>
             <div class="ui-block-a" style="width: 100%">
-                <a data-role="button" ng-click="nextRound()" href="#punches">Next Round</a>
-                <a data-role="button" ng-click="computeFinals()" href="#finishedbattle">Finish Battle</a>
+                <a  id="btn-next-round" data-role="button" ng-click="nextRound()" href="#punches">Next Round</a>
+                <a  id="btn-finish-battle" data-role="button" ng-click="computeFinals()" href="#finishedbattle">Finish Battle</a>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
             <h1>B. A. R. S.</h1>
         </div>
         <div data-role="content">
-            <h1>Winner: {{winner}} !</h1>
+            <h1 id="text-winner">Winner: {{winner}}!</h1>
             <p>{{rapper1Name}} score: {{rapper1Score}}</p>
             <p>{{rapper2Name}} score: {{rapper2Score}}</p>
             <a twitter  

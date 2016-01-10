@@ -35,5 +35,5 @@
     <a ng-repeat="chokes in [11,12,13,14,15,16,17,18,19,20]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a>
 </div>
 
-<h3 ng-show="getErrors()" >Subtracting {{getErrors()}} points for errors</h3>
+<h3 id='error-tally' ng-show="getErrors()" >Subtracting {{getErrors()}} points for errors</h3>
 
