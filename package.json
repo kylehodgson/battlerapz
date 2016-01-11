@@ -4,7 +4,7 @@
   "description": "BattleRap Scoring App",
   "main": "index.js",
   "scripts": {
-    "test": "karma run && protractor specs/functional/conf.js",
+    "test": "protractor specs/functional/conf.js",
     "start": "cd src/www && python -mSimpleHTTPServer"
   },
   "repository": {

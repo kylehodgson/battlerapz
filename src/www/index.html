@@ -115,7 +115,7 @@
             <h1 id="text-winner">Winner: {{winner}}!</h1>
             <p>{{rapper1Name}} score: {{rapper1Score}}</p>
             <p>{{rapper2Name}} score: {{rapper2Score}}</p>
-            <a twitter  
+            <a twitter
                 data-lang="en" 
                 data-count='horizontal' 
                 data-url="http://battlerapscorer.com" 
@@ -142,6 +142,13 @@
         </div>
         <div data-role="content">
             <help-text></help-text>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+            <ul>
+                <li><a href="#startBattle" ng-click="clearBattle()">New Battle</a></li>
+            </ul>
+            </div>
         </div>
     </div>
 </div>
