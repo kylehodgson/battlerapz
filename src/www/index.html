@@ -3,23 +3,43 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,target-densitydpi=device-dpi,user-scalable=0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src *; 
+                                                        style-src 'self' 'unsafe-inline'; 
+                                                        script-src 'self' 'unsafe-inline' 'unsafe-eval' platform.twitter.com;">
+
 	<title>B.A.R.S.</title>
+    
+    <!-- jquery -->
     <script type="text/javascript" src="lib/jquery-1.6.4.js"></script>
+    <!-- jquery mobile -->
     <script type="text/javascript" src="lib/jquery.mobile-1.1.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.structure-1.1.0.css">
+    <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.theme-1.1.0.css">
+    <link rel="stylesheet" type="text/css" href="themes/Themecolour.min.css" />
+    <link rel="stylesheet" type="text/css" href="themes/jquery.mobile.icons.min.css" />
+    <!-- angular  -->
     <script type="text/javascript" src="lib/angular.js"></script>
+    <!-- angular social share -->
     <script type="text/javascript" src="lib/twitter-widgets.js"></script>
     <script type="text/javascript" src="lib/angular-socialshare.js"></script>
+    <link rel='stylesheet' type="text/css" href="styles/angular-socialshare.min.css">
+    <!-- ng-cordova -->
+    <script type="text/javascript" src="lib/ng-cordova.js"></script>
+    <!-- cordova social share -->
+    <script type="text/javascript" src="lib/SocialSharing.js"></script>
+    <!-- app -->
     <script type="text/javascript" src="app/BattleService.js"></script>
     <script type="text/javascript" src="app/MobileController.js"></script>
     <script type="text/javascript" src="app/PerformanceScoresDirective.js"></script>
     <script type="text/javascript" src="app/HowToScoreDirective.js"></script>
+    <script type="text/javascript" src="app/BarsNativeShareDirective.js"></script>
+    <script type="text/javascript" src="app/BarsWebShareDirective.js"></script>
     <script type="text/javascript" src="app/FinalScoresDirective.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.structure-1.1.0.css">
-    <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.theme-1.1.0.css">
-    <link rel='stylesheet' type="text/css" href="styles/angular-socialshare.min.css">
-    <link rel="stylesheet" type="text/css" href="themes/Themecolour.min.css" />
-    <link rel="stylesheet" type="text/css" href="themes/jquery.mobile.icons.min.css" />
+    <!-- cordova -->
+    <script type="text/javascript" src="cordova.js"></script> 
+    
+    
     <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 <body ng-app="bars">
@@ -30,6 +50,8 @@
         </div>
         <div data-role="content">
             <h1>BAttle Rap Scorer</h1>
+            <h3>Bring weight to the debate!</h3>
+
             <a data-role="button" href="#startBattle" data-iconpos="right" id="btn-start-battle">Start</a>
             <a data-role="button" href="#howToScore" data-iconpos="right" id="btn-how-to-score">How To Score</a>
         </div>
@@ -113,17 +135,7 @@
         </div>
         <div data-role="content">
             <h1 id="text-winner">Winner: {{winner}}!</h1>
-            <p>{{rapper1Name}} score: {{rapper1Score}}</p>
-            <p>{{rapper2Name}} score: {{rapper2Score}}</p>
-            <a twitter
-                data-lang="en" 
-                data-count='horizontal' 
-                data-url="http://battlerapscorer.com" 
-                data-via='battlerapscorer' 
-                data-size="medium" 
-                data-text="{{tweet}}" 
-                data-hashtags="BattleRap" ></a>
-            <h4>Battle breakdown:</h4>
+            <bars-share></bars-share>
             <final-scores></final-scores>
         </div>
         <div data-role="footer" data-position="fixed">
@@ -145,6 +157,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
             <ul>
+                <li ng-show="rapper1Name"><a href="#" class="ui-btn" data-rel="back">Continue Battle</a></li>
                 <li><a href="#startBattle" ng-click="clearBattle()">New Battle</a></li>
             </ul>
             </div>

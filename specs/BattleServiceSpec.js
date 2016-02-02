@@ -25,7 +25,11 @@ describe("BattleService", function() {
     it("Can track categories", function() {
         svc.setScore('test category', 5);
         svc.setScore('test category 2', 5);
-        expect(svc.scoreForRapper(svc.rapper)).toBe(10);
+        svc.setScore('errors', -1);
+        svc.setScore('reaches', -2);
+        expect(svc.getScoreForCategory('test category')).toBe(5)
+        expect(svc.getScoreForCategory('reaches')).toBe(-2)
+        expect(svc.scoreForRapper(svc.rapper)).toBe(7);
     });
     it("Can score rounds", function() {
         svc.addPunch({});

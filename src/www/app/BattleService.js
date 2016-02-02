@@ -69,9 +69,9 @@ BattleTapez.BattleService = function () {
             this.rounds[this.round - 1].scores[this.rapper - 1].categories[category] = score;
         },
         getScoreForCategory: function (category) {
-            //if (typeof this.round == 0) return;
-            if (typeof this.rounds[this.round - 1] === "undefined") return;
-            if (typeof this.rounds[this.round - 1].scores[this.rapper -1] === "undefined") return;
+            if (typeof this.rounds[this.round - 1] === "undefined") return 0;
+            if (typeof this.rounds[this.round - 1].scores[this.rapper -1] === "undefined") return 0;
+            if (typeof  this.rounds[this.round - 1].scores[this.rapper -1].categories[category] === "undefined") return 0;
             return this.rounds[this.round - 1].scores[this.rapper -1].categories[category];
         },
         nextRapper: function () {

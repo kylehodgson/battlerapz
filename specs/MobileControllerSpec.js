@@ -53,7 +53,12 @@ describe("Mobile Controller", function() {
         $scope.computeFinals();
         expect($scope.winner).toBe(testRapper2);
     });
-
+    it("Counts errors",function() {
+        $scope.setErrors("errors", 1);
+        expect($scope.getErrors()).toBe(-1)
+        $scope.setErrors("reaches", 1);
+        expect($scope.getErrors()).toBe(-2)
+    });
     it("Calculates errors against final score", function() {
         // ARRANGE
         // Rapper one ... two punches

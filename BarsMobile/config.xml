@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.battlerapscorer.bars" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.battlerapscorer.bars" version="0.0.89" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BARS</name>
     <description>
         B.A.R.S BAttle Rap Scorer is a smartphone app which allows fans to score a battle rap while keeping their eyes on the action. Battles should be debatable because the performers delivered their best performances and not because an online fan can’t score a battle. The B.A.R.S. app offers an easy to use line by line scoring system as well as overall performance scores. Clearly show how battles were won and were points were scored.
@@ -8,7 +8,9 @@
         Kyle Hodgson
     </author>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" version="1" />
+    <plugin name="cordova-plugin-whitelist"  />
+    <plugin name="cordova-plugin-x-socialsharing" />
+    <plugin name="cordova-plugin-vibration" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -74,5 +76,7 @@
     <splash src="res/screen/android/splash-port-ldpi.png" density="port-ldpi"/>
     <splash src="res/screen/android/splash-port-mdpi.png" density="port-mdpi"/>
     <splash src="res/screen/android/splash-port-xhdpi.png" density="port-xhdpi"/>
+    
+    <hook type="after_prepare" src="hooks/afterPrepare.js" />
 </platform>
 </widget>

@@ -1,6 +1,6 @@
 BattleTapez = typeof BattleTapez === "undefined" ? {} : BattleTapez;
 
-BattleTapez.MobileController = function ($scope, Battle) {
+BattleTapez.MobileController = function ($scope, Battle, $cordovaSocialSharing) {
 
     const unSelectedStarsColor = '#2489CE';
     const selectedStarsColor = '#ff0000';
@@ -83,7 +83,23 @@ BattleTapez.MobileController = function ($scope, Battle) {
     };
 
     $scope.getErrors = function () {
-        return Battle.getScoreForCategory('errors');
+        return Battle.getScoreForCategory('errors') + Battle.getScoreForCategory('reaches');
+    }
+    
+    $scope.barsNativeShare = function() {
+        var message = $scope.tweet
+        
+        document.addEventListener("deviceready", function () {
+            $cordovaSocialSharing
+            .share(message) 
+            .then(function(result)
+            {
+                $log.info('success sharing ' + message + ' : ' + result);
+            }, function(err)
+            {
+                $log.info('error sharing ' + message + ' : ' + err);
+            });
+        }, false);
     }
 
     $scope.nextRound = function () {
@@ -327,6 +343,10 @@ BattleTapez.MobileController = function ($scope, Battle) {
             return;
         }
         
-        window.plugins.deviceFeedback.haptic()
+        document.addEventListener("deviceready", function () {
+            window.plugins.deviceFeedback.haptic()
+        }, false);
+        
+        
     };
 };

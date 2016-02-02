@@ -27,13 +27,19 @@
     <a ng-repeat="stars in [1,2,3,4,5]" id="freshness-{{stars}}" ng-click="setScore('freshness',stars)">☆ </a>
 </div>
 
-<div>Chokes</div>
+<div>Subtract points for:</div>
 
-<div class="ui-block-a" style="width: 35%; font-size:18px">Subtract</div>
+<div class="ui-block-a" style="width: 35%; font-size:18px">Chokes</div>
 <div class="ui-block-b" style="width: 65%; font-size:28px; font-color:red">
-    <span> <a ng-repeat="chokes in [1,2,3,4,5]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a> </span><br>
-    <span> <a ng-repeat="chokes in [6,7,8,9,10]" id="errors-{{chokes}}" ng-click="setErrors('errors',chokes)"> x  </a> </span>
+   <span> <a ng-repeat="x in [1,2,3,4,5]" id="errors-{{x}}" ng-click="setErrors('errors',x)"> x  </a> </span><br>
+   <span> <a ng-repeat="x in [6,7,8,9,10]" id="errors-{{x}}" ng-click="setErrors('errors',x)"> x  </a> </span>
 </div>
+<div class="ui-block-a" style="width: 35%; font-size:18px">Reaches</div>
+<div class="ui-block-b" style="width: 65%; font-size:28px; font-color:red">
+    <span> <a ng-repeat="x in [1,2,3,4,5]" id="reaches-{{x}}" ng-click="setErrors('reaches',x)"> x  </a> </span><br>
+
+</div>
+
 
 <h3 id='error-tally' ng-show="getErrors()" >Subtracting {{getErrors()}} points for errors</h3>
 
