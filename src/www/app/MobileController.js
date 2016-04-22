@@ -6,7 +6,7 @@ BattleTapez.MobileController = function ($scope, Battle, $cordovaSocialSharing) 
     const selectedStarsColor = '#ff0000';
     const selectedErrorsColor = '#ff0000';
     const unSelectedErrorsColor = '#2489CE';
-    const errorMax = 20;
+    const errorMax = 10;
     const starMax = 5;
     const lastRapper = 2;
     const punchButton = document.querySelector("#btnPunch");
@@ -108,11 +108,17 @@ BattleTapez.MobileController = function ($scope, Battle, $cordovaSocialSharing) 
             Battle.nextRound();
         }
         Battle.nextRapper();
-        Object.keys(Battle.getCategories()).forEach(function (category) {
+        $scope.battleCalculator().listOfScoreCategories().forEach(function(category) {
             for (var i = 1; i <= starMax; i++) {
                 starElementFor(category, i).css('color', unSelectedStarsColor);
             }
-        });
+        })
+        
+        $scope.battleCalculator().listOfErrorCategories().forEach(function(category) {
+            for (var i = 1; i <= errorMax; i++) {
+                starElementFor(category, i).css('color', unSelectedErrorsColor);
+            }
+        })
     };
     
     $scope.rapperName = function() {

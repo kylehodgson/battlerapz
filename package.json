@@ -4,6 +4,7 @@
   "description": "BattleRap Scoring App",
   "main": "index.js",
   "scripts": {
+    "pretest": "echo webdriver-manager start",
     "test": "protractor specs/functional/conf.js",
     "start": "cd src/www && python -mSimpleHTTPServer"
   },
